@@ -86,7 +86,6 @@ const Navbar = () => {
 
                 {/* Dropdown Links */}
                 <div className="flex flex-col text-sm font-medium text-gray-600">
-
                   <Link href="/profile" onClick={() => setIsProfileOpen(false)} className="flex items-center gap-2 px-2 py-2 hover:bg-gray-50 rounded-xl transition">
                     <User className="w-4 h-4 text-gray-400" />
                     <span>My Account</span>
@@ -106,12 +105,16 @@ const Navbar = () => {
             )}
           </div>
 
-          <button className="flex items-center bg-linear-to-r from-[#f7947d] to-[#ffaf9d] text-white px-5 py-2 rounded-full text-sm font-bold shadow-md shadow-orange-200/50 hover:scale-105 active:scale-[0.98] transition">
-            Login
-          </button>
-          <button className="flex items-center bg-linear-to-r from-[#f7947d] to-[#ffaf9d] text-white px-5 py-2 rounded-full text-sm font-bold shadow-md shadow-orange-200/50 hover:scale-105 active:scale-[0.98] transition">
-            Sign up
-          </button>
+          <Link href="/login">
+            <button className="flex items-center bg-linear-to-r from-[#f7947d] to-[#ffaf9d] text-white px-5 py-2 rounded-full text-sm font-bold shadow-md shadow-orange-200/50 hover:scale-105 active:scale-[0.98] transition">
+              Login
+            </button>
+          </Link>
+          <Link href="/signUp">
+            <button className="flex items-center bg-linear-to-r from-[#f7947d] to-[#ffaf9d] text-white px-5 py-2 rounded-full text-sm font-bold shadow-md shadow-orange-200/50 hover:scale-105 active:scale-[0.98] transition">
+              Sign up
+            </button>
+          </Link>
         </div>
 
         {/* Mobile Hamburger Trigger */}
@@ -162,8 +165,10 @@ const Navbar = () => {
           </div>
 
           <div className="grid grid-cols-2 gap-3 pt-1">
-            <button className="w-full text-center bg-gray-100 hover:bg-gray-200 text-gray-700 py-2.5 rounded-xl text-xs font-bold transition">Login</button>
-            <button className="w-full text-center bg-linear-to-r from-[#f7947d] to-[#ffaf9d] text-white py-2.5 rounded-xl text-xs font-bold transition shadow-sm">Sign up</button>
+            <Link href="/login"><button className="w-full text-center bg-gray-100 hover:bg-gray-200 text-gray-700 py-2.5 rounded-xl text-xs font-bold transition">Login</button></Link>
+            <Link href="/signUp">
+              <button className="w-full text-center bg-linear-to-r from-[#f7947d] to-[#ffaf9d] text-white py-2.5 rounded-xl text-xs font-bold transition shadow-sm">Sign up</button>
+            </Link>
           </div>
         </div>
       </div>
