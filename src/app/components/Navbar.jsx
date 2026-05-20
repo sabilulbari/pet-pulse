@@ -1,57 +1,171 @@
-import Image from "next/image";
-import { Avatar } from "@heroui/react";
-import Link from "next/link";
-const Navbar = () => {
-  return (
-    <nav className="flex sticky top-0 z-999 backdrop-blur-lg bg-[#febe74]/20  border-b border-white/20 items-center justify-between px-10 py-6 ">
-      {/* Logo Area */}
-      <Link href="/" className="flex items-center gap-2 ">
-        <div className="bg-[#5af5a069] p-2 rounded-full">
-          {/* Simple Paw Icon Placeholder */}
-          <span className="text-white text-xl">
-            <Image src="/assets/pet.webp" width={24} height={24} alt="Paw Icon" />
-          </span>
-        </div>
-        <div className="flex flex-col">
-          <span className="font-bold text-xl text-gray-800 leading-none">
-            Pet <span className="text-[#febe74]">Pulse</span>
-          </span>
-          <span className="text-sm text-[#279608]">Adoptions</span>
-        </div>
-      </Link>
+"use client";
 
-      {/* Navigation Links */}
-      <div className="hidden md:flex  items-center gap-8 text-gray-600 font-medium">
-        <Link href="/" className="text-green-500 hover:text-[#febe74] border-b-2 border-white hover:border-[#febe74] duration-300 pb-1">
-          Home
+import { useState, useEffect, useRef } from "react";
+import Image from "next/image";
+import Link from "next/link";
+import { Avatar } from "@heroui/react";
+import { Menu, X, LogOut, User, Settings } from "lucide-react";
+
+const Navbar = () => {
+  const [isOpen, setIsOpen] = useState(false); // Mobile menu state
+  const [isProfileOpen, setIsProfileOpen] = useState(false); // Profile dropdown state
+  const dropdownRef = useRef(null);
+
+  // বাইরে ক্লিক করলে প্রোফাইল ড্রপডাউন বন্ধ করার জন্য useEffect
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsProfileOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  const user = {
+    name: "John Doe",
+    email: "johndoe@example.com",
+    avatarSrc: "https://img.heroui.chat/image/avatar?w=400&h=400&u=3",
+  };
+
+  return (
+    <nav className="sticky top-0 z-50 backdrop-blur-lg bg-[#febe74]/10 border-b border-white/20 px-6 md:px-10 py-4 transition-all duration-300">
+      <div className="max-w-7xl mx-auto flex items-center justify-between">
+        {/* Logo Area */}
+        <Link href="/" className="flex items-center gap-2 shrink-0">
+          <div className="bg-[#5af5a0/40] p-2 rounded-full flex items-center justify-center">
+            <Image src="/assets/pet.webp" width={24} height={24} alt="Paw Icon" />
+          </div>
+          <div className="flex flex-col">
+            <span className="font-bold text-xl text-gray-800 leading-none tracking-tight">
+              Pet <span className="text-[#febe74]">Pulse</span>
+            </span>
+            <span className="text-xs font-semibold text-[#279608] mt-0.5">Adoptions</span>
+          </div>
         </Link>
-        <Link href="/all-pets" className="border-b-2 text-green-500 border-white hover:border-[#febe74] hover:text-[#febe74] duration-300 transition">
-          All Pets
-        </Link>
-        <Link href="/my-requests" className="text-green-500 border-b-2 border-white hover:border-[#febe74] hover:text-[#febe74] duration-300 transition">
-          My Request
-        </Link>
-        <Link href="/add-pets" className="text-green-500 border-b-2 border-white hover:border-[#febe74] hover:text-[#febe74] duration-300 transition">
-          Add Pet
-        </Link>
+
+        {/* Desktop Navigation Links */}
+        <div className="hidden md:flex items-center gap-6 lg:gap-8 text-gray-600 font-semibold text-sm">
+          <Link href="/" className="text-[#279608] hover:text-[#febe74] border-b-2 border-transparent hover:border-[#febe74] duration-200 pb-1">
+            Home
+          </Link>
+          <Link href="/all-pets" className="text-gray-600 hover:text-[#febe74] border-b-2 border-transparent hover:border-[#febe74] duration-200 pb-1">
+            All Pets
+          </Link>
+          <Link href="/my-requests" className="text-gray-600 hover:text-[#febe74] border-b-2 border-transparent hover:border-[#febe74] duration-200 pb-1">
+            My Request
+          </Link>
+          <Link href="/add-pets" className="text-gray-600 hover:text-[#febe74] border-b-2 border-transparent hover:border-[#febe74] duration-200 pb-1">
+            Add Pet
+          </Link>
+        </div>
+
+        {/* Desktop Actions */}
+        <div className="hidden md:flex items-center gap-4 lg:gap-6 relative">
+          {/* Profile Clickable Area */}
+          <div className="relative" ref={dropdownRef}>
+            <button
+              onClick={() => setIsProfileOpen(!isProfileOpen)}
+              className="flex gap-2 items-center text-gray-600 hover:text-[#febe74] group transition-colors focus:outline-none"
+            >
+              <Avatar src={user.avatarSrc} name={user.name} className="w-9 h-9 text-xs border-2 border-transparent group-hover:border-[#febe74] transition-all cursor-pointer" />
+              <p className="text-sm font-semibold text-[#279608] group-hover:text-[#febe74]">Profile</p>
+            </button>
+
+            {/* Profile Dropdown Menu */}
+            {isProfileOpen && (
+              <div className="absolute right-0 mt-3 w-64 bg-white rounded-2xl shadow-xl border border-gray-100 py-4 px-4 flex flex-col gap-3 animate-in fade-in slide-in-from-top-2 duration-200">
+                {/* User Info Header */}
+                <div className="flex items-center gap-3 border-b border-gray-100 pb-3">
+                  <Avatar src={user.avatarSrc} name={user.name} className="w-11 h-11 text-xs" />
+                  <div className="flex flex-col overflow-hidden">
+                    <span className="font-bold text-sm text-gray-800 truncate">{user.name}</span>
+                    <span className="text-xs text-gray-400 truncate">{user.email}</span>
+                  </div>
+                </div>
+
+                {/* Dropdown Links */}
+                <div className="flex flex-col text-sm font-medium text-gray-600">
+
+                  <Link href="/profile" onClick={() => setIsProfileOpen(false)} className="flex items-center gap-2 px-2 py-2 hover:bg-gray-50 rounded-xl transition">
+                    <User className="w-4 h-4 text-gray-400" />
+                    <span>My Account</span>
+                  </Link>
+                  <Link href="/dashboard" onClick={() => setIsProfileOpen(false)} className="flex items-center gap-2 px-2 py-2 hover:bg-gray-50 rounded-xl transition">
+                    <Settings className="w-4 h-4 text-gray-400" />
+                    <span>Dashboard</span>
+                  </Link>
+                </div>
+
+                {/* Logout Button */}
+                <button className="w-full flex items-center gap-2 px-2 py-2 text-sm font-bold text-red-500 hover:bg-red-50 rounded-xl transition text-left mt-1">
+                  <LogOut className="w-4 h-4" />
+                  <span>Logout</span>
+                </button>
+              </div>
+            )}
+          </div>
+
+          <button className="flex items-center bg-linear-to-r from-[#f7947d] to-[#ffaf9d] text-white px-5 py-2 rounded-full text-sm font-bold shadow-md shadow-orange-200/50 hover:scale-105 active:scale-[0.98] transition">
+            Login
+          </button>
+          <button className="flex items-center bg-linear-to-r from-[#f7947d] to-[#ffaf9d] text-white px-5 py-2 rounded-full text-sm font-bold shadow-md shadow-orange-200/50 hover:scale-105 active:scale-[0.98] transition">
+            Sign up
+          </button>
+        </div>
+
+        {/* Mobile Hamburger Trigger */}
+        <div className="md:hidden flex items-center">
+          <button onClick={() => setIsOpen(!isOpen)} className="text-gray-700 hover:text-[#febe74] p-1 transition-colors cursor-pointer" aria-label="Toggle Menu">
+            {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          </button>
+        </div>
       </div>
 
-      {/* Right Side Actions */}
-      <div className="flex items-center gap-6">
-        <button className="flex gap-2 items-center text-gray-600 hover:text-[#febe74]">
-          <Avatar className="border-2 border-white hover:border-[#febe74] duration-300 rounded-full p-1">
-            <Avatar.Image className="rounded-full " alt="John Doe" width={40} height={40} src="https://img.heroui.chat/image/avatar?w=400&h=400&u=3" />
-            <Avatar.Fallback>JD</Avatar.Fallback>
-          </Avatar>
-          <p className="text-green-500 hover:text-[#febe74]  border-b-2 border-white hover:border-[#febe74]">Profile</p>
-        </button>
+      {/* Mobile Dropdown Panel */}
+      <div className={`md:hidden overflow-hidden transition-all duration-300 ease-in-out ${isOpen ? "max-h-130 opacity-100 mt-4" : "max-h-0 opacity-0 pointer-events-none"}`}>
+        <div className="bg-white/90 backdrop-blur-md rounded-2xl p-5 border border-gray-100 shadow-xl flex flex-col gap-4">
+          <Link href="/" onClick={() => setIsOpen(false)} className="text-[#279608] font-bold text-sm py-1 border-b border-gray-50">
+            Home
+          </Link>
+          <Link href="/all-pets" onClick={() => setIsOpen(false)} className="text-gray-600 hover:text-[#febe74] font-semibold text-sm py-1 border-b border-gray-50">
+            All Pets
+          </Link>
+          <Link href="/my-requests" onClick={() => setIsOpen(false)} className="text-gray-600 hover:text-[#febe74] font-semibold text-sm py-1 border-b border-gray-50">
+            My Request
+          </Link>
+          <Link href="/add-pets" onClick={() => setIsOpen(false)} className="text-gray-600 hover:text-[#febe74] font-semibold text-sm py-1 border-b border-gray-50">
+            Add Pet
+          </Link>
 
-        <button className="flex items-center bg-linear-to-r from-[#f7947d] to-[#ffaf9d] text-white px-4 py-2 rounded-full font-semibold shadow-lg shadow-orange-200 hover:scale-105 transition-transform">
-          Login
-        </button>
-        <button className="flex items-center bg-linear-to-r from-[#f7947d] to-[#ffaf9d] text-white px-4 py-2 rounded-full font-semibold shadow-lg shadow-orange-200 hover:scale-105 transition-transform">
-          Sign up
-        </button>
+          <div className="h-px bg-gray-100 my-1" />
+
+          {/* Mobile Profile Card */}
+          <div className="flex flex-col bg-gray-50/50 rounded-2xl p-3 border border-gray-100/50 gap-3">
+            <div className="flex gap-3 items-center">
+              <Avatar src={user.avatarSrc} name={user.name} className="w-10 h-10 text-xs" />
+              <div className="flex flex-col overflow-hidden">
+                <p className="text-sm font-bold text-gray-800 truncate">{user.name}</p>
+                <p className="text-xs text-gray-400 truncate">{user.email}</p>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-2 gap-2 text-center text-xs font-bold mt-1">
+              <Link href="/profile" onClick={() => setIsOpen(false)} className="bg-white border border-gray-100 py-2 rounded-xl text-gray-600 hover:bg-gray-50">
+                My Profile
+              </Link>
+              <Link href="/profile" onClick={() => setIsOpen(false)} className="bg-white border border-gray-100 py-2 rounded-xl text-gray-600 hover:bg-gray-50">
+                Dashboard
+              </Link>
+              <button className="bg-red-50 w-full text-red-500 py-2 rounded-xl hover:bg-red-100/70 transition">Logout</button>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-2 gap-3 pt-1">
+            <button className="w-full text-center bg-gray-100 hover:bg-gray-200 text-gray-700 py-2.5 rounded-xl text-xs font-bold transition">Login</button>
+            <button className="w-full text-center bg-linear-to-r from-[#f7947d] to-[#ffaf9d] text-white py-2.5 rounded-xl text-xs font-bold transition shadow-sm">Sign up</button>
+          </div>
+        </div>
       </div>
     </nav>
   );

@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 import { MdOutlinePets } from "react-icons/md";
 
@@ -19,12 +20,14 @@ const Banner = () => {
 
           <p className="text-lg text-gray-600 max-w-md">Thousands of adorable pets are looking for a loving home. Adopt today and find your loyal companion.</p>
 
-          <button className="flex items-center gap-3 bg-linear-to-r from-[#f7947d] to-[#ffaf9d] text-white px-8 py-4 rounded-full font-semibold shadow-lg shadow-orange-200 hover:scale-105 transition-transform">
-            <span className="bg-white/20 p-1 rounded-full">
-              <MdOutlinePets />
+          <Link href={'/all-pets'}>
+            <button  className="flex items-center gap-3 cursor-pointer bg-linear-to-r from-[#f7947d] to-[#ffaf9d] text-white px-8 py-4 rounded-full font-semibold shadow-lg shadow-orange-200 hover:scale-105 transition-transform">
+              <span className="bg-white/20 p-1 rounded-full">
+                <MdOutlinePets />
             </span>
             Adopt Now &gt;
           </button>
+          </Link>
 
           {/* Feature Badges */}
           <div className="flex gap-8 pt-4 text-gray-700">

@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { Heart } from "lucide-react";
 import Image from "next/image";
 import { MdOutlineCalendarMonth, MdOutlinePets } from "react-icons/md";
+import Link from 'next/link';
 
 const FeatureCard = ({pet}) => {
     return (
@@ -32,9 +33,9 @@ const FeatureCard = ({pet}) => {
             <p className="text-gray-600 pt-2">{pet.petBio}</p>
           </div>
           <div className="flex items-center justify-center py-2">
-            <button className="flex items-center justify-center w-[60%] cursor-pointer bg-linear-to-r from-[#f7947d] to-[#ffaf9d] text-white px-4 py-2 rounded-full font-semibold shadow-lg shadow-orange-200 hover:scale-105 transition-transform">
+            <Link href={`/all-pets/${pet._id}`} className="flex items-center justify-center w-[60%] cursor-pointer bg-linear-to-r from-[#f7947d] to-[#ffaf9d] text-white px-4 py-2 rounded-full font-semibold shadow-lg shadow-orange-200 hover:scale-105 transition-transform">
               View Details
-            </button>
+            </Link>
           </div>
         </motion.div>
       </div>
