@@ -38,11 +38,22 @@ export default function AddPetForm() {
   };
 
   // Form submit handler to log dataset to console
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("--- Form Submission Data ---");
-    console.log(formData);
-   
+    const fromData = new FormData(e.target);
+    const addPets = Object.fromEntries(fromData.entries());
+
+    const res = await fetch("http://localhost:5000/addPet", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(addPets),
+    });
+
+    const data = await res.json();
+    console.log(data);
+
   };
 
   return (
@@ -107,7 +118,7 @@ export default function AddPetForm() {
                     />
                     {formData.petName && <CheckCircle2 className="w-4 h-4 text-emerald-500 absolute right-3.5 top-1/2 transform -translate-y-1/2" />}
                   </div>
-                  <span className="text-xs text-gray-400">Enter your pet's name</span>
+                  <span className="text-xs text-gray-400">Enter your pet&apos;s name</span>
                 </div>
 
                 {/* Species */}
@@ -128,7 +139,7 @@ export default function AddPetForm() {
                     </select>
                     <ChevronDown className="w-4 h-4 text-gray-400 absolute right-3.5 top-1/2 transform -translate-y-1/2 pointer-events-none" />
                   </div>
-                  <span className="text-xs text-gray-400">Select your pet's species</span>
+                  <span className="text-xs text-gray-400">Select your pet&apos;s species</span>
                 </div>
 
                 {/* Breed */}
@@ -207,9 +218,9 @@ export default function AddPetForm() {
                       onChange={handleChange}
                       className="w-full text-sm border border-gray-200 rounded-xl pl-3.5 pr-10 py-2.5 appearance-none bg-white focus:outline-none focus:ring-2 focus:ring-orange-100 focus:border-[#f2745f]"
                     >
-                      <option value="Yes">Good</option>
-                      <option value="No">Needs Attention</option>
-                      <option value="No">Weak</option>
+                      <option value="Good">Good</option>
+                      <option value="Needs Attention">Needs Attention</option>
+                      <option value="Weak">Weak</option>
                     </select>
                     <ChevronDown className="w-4 h-4 text-gray-400 absolute right-3.5 top-1/2 transform -translate-y-1/2 pointer-events-none" />
                   </div>
@@ -302,7 +313,7 @@ export default function AddPetForm() {
                     value={formData.petBio}
                     onChange={handleChange}
                     placeholder="Tell us about your pet's personality, habits, and likes..."
-                    className="w-full text-sm border border-gray-200 rounded-xl px-3.5 py-2.5 focus:outline-none focus:ring-2 focus:ring-orange-100 focus:border-[#f2745f] h-[78px] resize-none"
+                    className="w-full text-sm border border-gray-200 rounded-xl px-3.5 py-2.5 focus:outline-none focus:ring-2 focus:ring-orange-100 focus:border-[#f2745f] h-19.5 resize-none"
                   />
                   <div className="flex justify-between items-center text-xs text-gray-400">
                     <span>Max 200 characters</span>
@@ -323,7 +334,7 @@ export default function AddPetForm() {
             </div>
 
             {/* Image Preview Container */}
-            <div className="relative rounded-2xl overflow-hidden aspect-[4/3] w-full max-w-[340px] mx-auto border border-orange-100 bg-orange-50/30 group shadow-inner">
+            <div className="relative rounded-2xl overflow-hidden aspect-4/3 w-full max-w-85 mx-auto border border-orange-100 bg-orange-50/30 group shadow-inner">
               <Image
                 src={formData.imageUrl.trim() !== "" ? formData.imageUrl : fallbackPlaceholder}
                 width={300}

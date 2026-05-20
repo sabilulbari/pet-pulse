@@ -40,7 +40,7 @@ const Banner = () => {
         {/* Right Content: The Image */}
         <div className="relative w-125 h-125">
           <Image
-            src="https://images.unsplash.com/photo-1601758228041-f3b2795255f1?auto=format&fit=crop&q=80&w=800"
+            src="https://images.unsplash.com/photo-1529778873920-4da4926a72c2?fm=jpg&q=60&w=3000&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8bGl0dGxlJTIwY2F0fGVufDB8fDB8fHww"
             width={500}
             height={500}
             alt="Puppy and Kitten"
