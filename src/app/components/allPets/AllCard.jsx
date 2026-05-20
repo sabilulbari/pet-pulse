@@ -6,7 +6,7 @@ const AllCard = ({ pet }) => {
     return (
       <div>
         <div
-          key={pet.id}
+          key={pet._id}
           className="group bg-white rounded-2xl overflow-hidden border border-gray-100/80 transition-all duration-300 hover:shadow-[0_20px_35px_-10px_rgba(0,0,0,0.05)] hover:-translate-y-1"
         >
           {/* Card Image Area */}
@@ -14,8 +14,8 @@ const AllCard = ({ pet }) => {
             <Image
               width={200}
               height={150}
-              src={pet.image}
-              alt={pet.name}
+              src={pet.imageUrl}
+              alt={pet.petName}
               className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
               loading="lazy"
             />
@@ -30,14 +30,14 @@ const AllCard = ({ pet }) => {
           {/* Card Info Details */}
           <div className="p-4">
             <div className="flex items-center gap-1 mb-0.5">
-              <h3 className="font-extrabold text-sm text-gray-900 group-hover:text-purple-600 transition-colors">{pet.name}</h3>
+              <h3 className="font-extrabold text-md text-gray-900 group-hover:text-purple-600 transition-colors">{pet.petName}</h3>
             </div>
 
             <div className="flex items-center gap-1 text-[11px] font-medium text-gray-400 mb-2">
-              <span>{pet.type}</span>
+              <span>Pet Type: {pet.species}</span>
             </div>
 
-            <div className="text-sm font-extrabold text-indigo-600 mb-2.5">{pet.price}</div>
+            <div className="text-sm font-extrabold text-indigo-600 mb-2.5">Fee: ${pet.adoptionFee}</div>
 
             <div className="flex items-center justify-center gap-1 text-[11px] font-bold text-gray-400 border-t border-gray-50 pt-2.5">
               <button className="flex items-center justify-center w-[60%] cursor-pointer bg-linear-to-r from-[#7d95f7] to-[#9dd8ff] text-white px-4 py-2 rounded-full font-semibold shadow-lg shadow-blue-200 hover:scale-105 transition-transform">
