@@ -2,12 +2,17 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import { Eye, EyeOff, CheckCircle2, Lock, Mail, User, Image as ImageIcon, ShieldCheck, Heart, Cloud, ArrowRight, PawPrint } from "lucide-react";
+import { Eye, EyeOff, CheckCircle2, Lock, Mail, User, Image as ImageIcon, ShieldCheck, Heart, Cloud, ArrowRight, PawPrint, Check } from "lucide-react";
 import Image from "next/image";
+import { Button, Description, FieldError, Form, Input, InputGroup, Label, TextField } from "@heroui/react";
+import { BsEyeSlash } from "react-icons/bs";
 
 export default function RegisterPage() {
   const [showPassword, setShowPassword] = useState(false);
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
+  const handleSubmit=(e)=>{
+
+  }
 
   return (
     <div className="min-h-screen w-full bg-linear-to-br from-[#E6E2FA] via-[#FCECEF] to-[#FDF1E6] flex flex-col items-center justify-between p-4 md:p-8 font-sans select-none">
@@ -45,7 +50,7 @@ export default function RegisterPage() {
             <Image
               width={600}
               height={400}
-              alt={'cute'}
+              alt={"cute"}
               src="https://i.ibb.co.com/My0rN88q/Remove-background-project-May-20-2026-at-22-18-17.png"
               className="w-104 h-64 object-contain filter drop-shadow-[0_12px_20px_rgba(147,51,234,0.1)]"
             />
@@ -83,12 +88,12 @@ export default function RegisterPage() {
         </div>
 
         {/* ================= RIGHT COLUMN: INTERACTIVE FORM ================= */}
-        <div className="lg:col-span-7 p-8 md:p-10 flex flex-col justify-between">
+        <div className="lg:col-span-7 p-8 md:p-10 flex flex-col justify-center items-center ">
           {/* Form Content Wrapper */}
-          <div className="max-w-xl w-full mx-auto space-y-6">
+          <div className="max-w-xl w-full mx-auto space-y-6 ">
             <div>
-              <h2 className="text-xl font-extrabold text-[#1F1640] flex items-center gap-1.5">
-                Create your account{" "}
+              <h2 className="text-xl  font-extrabold text-[#1F1640] flex items-center gap-1.5">
+                Create your account
                 <span className="text-sm">
                   <PawPrint />
                 </span>
@@ -97,117 +102,111 @@ export default function RegisterPage() {
             </div>
 
             {/* Input Groups */}
-            <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
-              {/* Name Input */}
-              <div className="space-y-1">
-                <label className="text-xs font-bold text-gray-700 block">Name</label>
-                <div className="relative flex items-center">
-                  <User className="absolute left-4 w-4 h-4 text-gray-400" />
-                  <input
-                    type="text"
-                    defaultValue="Enter your full name"
-                    className="w-full bg-gray-50/60 border border-gray-100/80 rounded-xl pl-11 pr-10 py-3 text-xs font-medium text-gray-800 focus:outline-none focus:border-purple-400 focus:bg-white transition"
-                  />
-                  <CheckCircle2 className="absolute right-4 w-4 h-4 text-emerald-500 fill-emerald-50" />
-                </div>
-              </div>
-
-              {/* Email Input */}
-              <div className="space-y-1">
-                <label className="text-xs font-bold text-gray-700 block">Email</label>
-                <div className="relative flex items-center">
-                  <Mail className="absolute left-4 w-4 h-4 text-gray-400" />
-                  <input
-                    type="email"
-                    defaultValue="Enter your email address"
-                    className="w-full bg-gray-50/60 border border-gray-100/80 rounded-xl pl-11 pr-10 py-3 text-xs font-medium text-gray-800 focus:outline-none focus:border-purple-400 focus:bg-white transition"
-                  />
-                  <CheckCircle2 className="absolute right-4 w-4 h-4 text-emerald-500 fill-emerald-50" />
-                </div>
-              </div>
-
-              {/* Photo URL Input */}
-              <div className="space-y-1">
-                <div className="flex justify-between items-center">
-                  <label className="text-xs font-bold text-gray-700">Photo URL</label>
-                  <span className="text-[10px] text-gray-400 font-semibold bg-gray-100 px-1.5 py-0.5 rounded">Optional</span>
-                </div>
-                <div className="relative flex items-center">
-                  <ImageIcon className="absolute left-4 w-4 h-4 text-gray-400" />
-                  <input
-                    type="text"
-                    placeholder="https://example.com/your-photo.jpg"
-                    className="w-full bg-gray-50/60 border border-gray-100/80 rounded-xl pl-11 pr-4 py-3 text-xs font-medium text-gray-800 focus:outline-none focus:border-purple-400 focus:bg-white transition"
-                  />
-                </div>
-                <p className="text-[10px] text-gray-400 font-medium pl-1">Add a profile photo URL to personalize your account.</p>
-              </div>
-
-              {/* Password Input */}
-              <div className="space-y-1">
-                <label className="text-xs font-bold text-gray-700 block">Password</label>
-                <div className="relative flex items-center">
-                  <Lock className="absolute left-4 w-4 h-4 text-gray-400" />
-                  <input
-                    type={showPassword ? "text" : "password"}
-                    defaultValue="mypassword123"
-                    className="w-full bg-gray-50/60 border border-gray-100/80 rounded-xl pl-11 pr-10 py-3 text-xs font-medium text-gray-800 tracking-wider focus:outline-none focus:border-purple-400 focus:bg-white transition"
-                  />
-                  <button
-                    type="button"
-                    onClick={() => setShowPassword(!showPassword)}
-                    className="absolute right-4 text-gray-400 hover:text-purple-600 transition focus:outline-none"
-                  >
-                    {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
-                  </button>
-                </div>
-                {/* Strength Meter Label and Bar Indicator */}
-                <div className="flex items-center justify-between pt-1 px-0.5">
-                  <span className="text-[10px] text-emerald-600 font-bold flex items-center gap-1">
-                    <CheckCircle2 className="w-3 h-3 stroke-[2.5]" /> Great! Your password looks strong.
-                  </span>
-                  {/* Strength Bar indicators */}
-                  <div className="flex gap-1">
-                    <span className="w-4 h-1 rounded-full bg-emerald-500" />
-                    <span className="w-4 h-1 rounded-full bg-emerald-500" />
-                    <span className="w-4 h-1 rounded-full bg-emerald-500" />
-                    <span className="w-4 h-1 rounded-full bg-emerald-500" />
-                  </div>
-                </div>
-              </div>
-
-              {/* Confirm Password Input */}
-              <div className="space-y-1">
-                <label className="text-xs font-bold text-gray-700 block">Confirm Password</label>
-                <div className="relative flex items-center">
-                  <Lock className="absolute left-4 w-4 h-4 text-gray-400" />
-                  <input
-                    type={showConfirmPassword ? "text" : "password"}
-                    defaultValue="mypassword123"
-                    className="w-full bg-gray-50/60 border border-gray-100/80 rounded-xl pl-11 pr-10 py-3 text-xs font-medium text-gray-800 tracking-wider focus:outline-none focus:border-purple-400 focus:bg-white transition"
-                  />
-                  <button
-                    type="button"
-                    onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                    className="absolute right-4 text-gray-400 hover:text-purple-600 transition focus:outline-none"
-                  >
-                    {showConfirmPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
-                  </button>
-                </div>
-                <p className="text-[10px] text-emerald-600 font-bold px-0.5 pt-1 flex items-center gap-1">
-                  <CheckCircle2 className="w-3 h-3 stroke-[2.5]" /> Passwords match.
-                </p>
-              </div>
-
-              {/* Submit Action Button */}
-              <button
-                type="submit"
-                className="w-full py-3 px-4 bg-purple-600 text-white text-xs font-bold rounded-xl shadow-lg shadow-purple-600/10 hover:bg-purple-700 active:scale-[0.99] transition duration-150 flex items-center justify-center gap-1.5 mt-2"
+            <Form className="flex w-full flex-col gap-4" render={(props) => <form {...props} data-custom="foo" onSubmit={handleSubmit} />}>
+              {/* Name */}
+              <TextField isRequired name="name" type="text" validate={(value) => (value.trim() === "" ? "Name is required" : null)}>
+                <Label>Name</Label>
+                <Input className={"p-3.5"} placeholder="John Doe" />
+                <FieldError />
+              </TextField>
+              {/* Email */}
+              <TextField
+                isRequired
+                name="email"
+                type="email"
+                validate={(value) => {
+                  if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(value)) {
+                    return "Please enter a valid email address";
+                  }
+                  return null;
+                }}
               >
-                <span>Create account</span>
-                <ArrowRight className="w-3.5 h-3.5 stroke-[2.5]" />
-              </button>
-            </form>
+                <Label>Email</Label>
+                <Input className={"p-3.5"} placeholder="john@example.com" />
+                <FieldError />
+              </TextField>
+              {/* ImageUrl */}
+              <TextField name="imageUrl" type="text" placeholder="https://example.com/image.jpg">
+                <Label>Profile Image</Label>
+                <Input className={"p-3.5"} />
+                <FieldError />
+              </TextField>
+              {/* Password */}
+              <TextField
+                className={"relative"}
+                isRequired
+                minLength={8}
+                name="password"
+                type={`${showPassword ? "password" : "text"}`}
+                validate={(value) => {
+                  if (value.length < 8) {
+                    return "Password must be at least 8 characters";
+                  }
+                  if (!/[A-Z]/.test(value)) {
+                    return "Password must contain at least one uppercase letter";
+                  }
+                  if (!/[0-9]/.test(value)) {
+                    return "Password must contain at least one number";
+                  }
+                  return null;
+                }}
+              >
+                <Label>Password</Label>
+                <Input className={"p-3.5"} placeholder="Enter your password" />
+                <Button
+                  className={"absolute right-2 top-6 "}
+                  isIconOnly
+                  aria-label={showPassword ? "Hide password" : "Show password"}
+                  size="sm"
+                  variant="ghost"
+                  onPress={() => setShowPassword(!showPassword)}
+                >
+                  {showPassword ? <Eye className="size-4" /> : <BsEyeSlash className="size-4" />}
+                </Button>
+
+                <Description>Must be at least 8 characters with 1 uppercase and 1 number</Description>
+                <FieldError />
+              </TextField>
+              {/* Confirm Password */}
+              <TextField
+                className={"relative"}
+                isRequired
+                minLength={8}
+                type={`${showPassword ? "password" : "text"}`}
+                validate={(value) => {
+                  if (value.length < 8) {
+                    return "Password must be at least 8 characters";
+                  }
+                  if (!/[A-Z]/.test(value)) {
+                    return "Password must contain at least one uppercase letter";
+                  }
+                  if (!/[0-9]/.test(value)) {
+                    return "Password must contain at least one number";
+                  }
+                  return null;
+                }}
+              >
+                <Label>Confirm Password</Label>
+                <Input className={"p-3.5"} placeholder="Confirm your password" />
+                <Button
+                  className={"absolute right-2 top-6 "}
+                  isIconOnly
+                  aria-label={showPassword ? "Hide password" : "Show password"}
+                  size="sm"
+                  variant="ghost"
+                  onPress={() => setShowPassword(!showPassword)}
+                >
+                  {showPassword ? <Eye className="size-4" /> : <BsEyeSlash className="size-4" />}
+                </Button>
+                <Description>Must match the password entered above</Description>
+                <FieldError />
+              </TextField>
+              <div className="flex w-full gap-2">
+                <Button type="submit" className={"w-full"}>
+                  Create Account
+                </Button>
+              </div>
+            </Form>
 
             {/* Form Footer Link */}
             <div className="text-center text-xs font-semibold text-gray-400">
