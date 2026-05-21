@@ -6,13 +6,63 @@ import { Eye, EyeOff, CheckCircle2, Lock, Mail, User, Image as ImageIcon, Shield
 import Image from "next/image";
 import { Button, Description, FieldError, Form, Input, InputGroup, Label, TextField } from "@heroui/react";
 import { BsEyeSlash } from "react-icons/bs";
+import { authClient } from "../../lib/auth-client";
+import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
 
 export default function RegisterPage() {
-  const [showPassword, setShowPassword] = useState(false);
 
-  const handleSubmit=(e)=>{
+  const router = useRouter()
+  const [showPassword, setShowPassword] = useState(true);
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
 
-  }
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+    const inputData = Object.fromEntries(formData.entries());
+    console.log(inputData);
+
+    const { data, error } = await authClient.signUp.email({
+      name: inputData.userName, // required
+      email: inputData.userEmail, // required
+      image: inputData.userImageUrl, // required
+      password: inputData.userPassword, // required
+      rememberMe: true,
+    });
+    console.log(data);
+
+    if (data) {
+      toast.custom((t) => (
+        <div
+          className={`${
+            t.visible ? "animate-custom-enter" : "animate-custom-leave"
+          } max-w-md w-full bg-white shadow-lg rounded-lg pointer-events-auto flex ring-1 ring-black ring-opacity-5`}
+        >
+          <div className="flex-1 w-0 p-4">
+            <div className="flex items-start">
+              <div className="shrink-0 pt-0.5">
+                <Image width={50} height={50} className="h-10 w-10 rounded-full" src={data?.user?.image} alt="" />
+              </div>
+              <div className="ml-3 flex-1">
+                <p className="text-sm font-medium text-gray-900">{data?.user?.name}</p>
+                <p className="mt-1 text-sm text-gray-500">{data?.user?.email}</p>
+              </div>
+            </div>
+          </div>
+          <div className="flex border-l border-gray-200">
+            <button
+              onClick={() => toast.dismiss(t.id)}
+              className="w-full border border-transparent rounded-none rounded-r-lg p-4 flex items-center justify-center text-sm font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      ));
+      router.push('/login')
+    }
+  };
 
   return (
     <div className="min-h-screen w-full bg-linear-to-br from-[#E6E2FA] via-[#FCECEF] to-[#FDF1E6] flex flex-col items-center justify-between p-4 md:p-8 font-sans select-none">
@@ -104,7 +154,7 @@ export default function RegisterPage() {
             {/* Input Groups */}
             <Form className="flex w-full flex-col gap-4" render={(props) => <form {...props} data-custom="foo" onSubmit={handleSubmit} />}>
               {/* Name */}
-              <TextField isRequired name="name" type="text" validate={(value) => (value.trim() === "" ? "Name is required" : null)}>
+              <TextField isRequired name="userName" type="text" validate={(value) => (value.trim() === "" ? "Name is required" : null)}>
                 <Label>Name</Label>
                 <Input className={"p-3.5"} placeholder="John Doe" />
                 <FieldError />
@@ -112,7 +162,7 @@ export default function RegisterPage() {
               {/* Email */}
               <TextField
                 isRequired
-                name="email"
+                name="userEmail"
                 type="email"
                 validate={(value) => {
                   if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(value)) {
@@ -126,7 +176,7 @@ export default function RegisterPage() {
                 <FieldError />
               </TextField>
               {/* ImageUrl */}
-              <TextField name="imageUrl" type="text" placeholder="https://example.com/image.jpg">
+              <TextField name="userImageUrl" type="text" placeholder="https://example.com/image.jpg">
                 <Label>Profile Image</Label>
                 <Input className={"p-3.5"} />
                 <FieldError />
@@ -136,7 +186,6 @@ export default function RegisterPage() {
                 className={"relative"}
                 isRequired
                 minLength={8}
-                name="password"
                 type={`${showPassword ? "password" : "text"}`}
                 validate={(value) => {
                   if (value.length < 8) {
@@ -152,9 +201,9 @@ export default function RegisterPage() {
                 }}
               >
                 <Label>Password</Label>
-                <Input className={"p-3.5"} placeholder="Enter your password" />
+                <Input className={"p-3.5"} placeholder="Enter your password" value={password} onChange={(e) => setPassword(e.target.value)} />
                 <Button
-                  className={"absolute right-2 top-6 "}
+                  className={"absolute right-2 top-8 "}
                   isIconOnly
                   aria-label={showPassword ? "Hide password" : "Show password"}
                   size="sm"
@@ -172,6 +221,7 @@ export default function RegisterPage() {
                 className={"relative"}
                 isRequired
                 minLength={8}
+                name="userPassword"
                 type={`${showPassword ? "password" : "text"}`}
                 validate={(value) => {
                   if (value.length < 8) {
@@ -183,13 +233,16 @@ export default function RegisterPage() {
                   if (!/[0-9]/.test(value)) {
                     return "Password must contain at least one number";
                   }
+                  if (value !== password) {
+                    return "Confirm password does not match";
+                  }
                   return null;
                 }}
               >
                 <Label>Confirm Password</Label>
-                <Input className={"p-3.5"} placeholder="Confirm your password" />
+                <Input className={"p-3.5"} placeholder="Confirm your password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} />
                 <Button
-                  className={"absolute right-2 top-6 "}
+                  className={"absolute right-2 top-8 "}
                   isIconOnly
                   aria-label={showPassword ? "Hide password" : "Show password"}
                   size="sm"
@@ -202,7 +255,7 @@ export default function RegisterPage() {
                 <FieldError />
               </TextField>
               <div className="flex w-full gap-2">
-                <Button type="submit" className={"w-full"}>
+                <Button type="submit" className={"w-full p-6"}>
                   Create Account
                 </Button>
               </div>

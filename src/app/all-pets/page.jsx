@@ -1,16 +1,13 @@
-import { Search} from "lucide-react";
+import { Search } from "lucide-react";
 import Category from "../components/allPets/Category";
 import AllCard from "../components/allPets/AllCard";
 import BadgeSection from "../components/allPets/BadgeSection";
-import { allpetData } from "../lib/data";
-
-
+import { allpetData } from "../../lib/data";
 
 const PetMarketplace = async () => {
- 
-const allPets =await allpetData() 
+  const allPets = await allpetData();
 
-console.log(allPets);
+  console.log(allPets);
 
   return (
     <div className="min-h-screen bg-[#F9F9FC] text-[#2D3142] font-sans relative overflow-hidden">
@@ -56,6 +53,6 @@ console.log(allPets);
       </main>
     </div>
   );
-}
+};
 
 export default PetMarketplace;

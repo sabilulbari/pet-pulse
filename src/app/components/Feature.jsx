@@ -1,11 +1,10 @@
 import React from "react";
 import { Heart, ShieldCheck, Syringe, Sparkles, MapPin, ChevronRight } from "lucide-react";
 import FeatureCard from "./FeatureCard";
-import { allpetData } from "../lib/data";
-
+import { allpetData } from "../../lib/data";
 
 const Feature = async () => {
-  const petData = await allpetData()
+  const petData = await allpetData();
   console.log(petData);
 
   return (
