@@ -5,7 +5,6 @@ import { allpetData } from "../../lib/data";
 
 const Feature = async () => {
   const petData = await allpetData();
-  console.log(petData);
 
   return (
     <section className="bg-[#FAF9F7] py-20 px-6 lg:px-20">

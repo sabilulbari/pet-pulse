@@ -5,13 +5,27 @@ import Image from "next/image";
 import Link from "next/link";
 import { Avatar } from "@heroui/react";
 import { Menu, X, LogOut, User, Settings } from "lucide-react";
+import { authClient } from "@/lib/auth-client";
+import { RxDashboard } from "react-icons/rx";
+import { useRouter } from "next/navigation";
 
 const Navbar = () => {
+  const router = useRouter();
+  const { data: session } = authClient.useSession();
   const [isOpen, setIsOpen] = useState(false); // Mobile menu state
   const [isProfileOpen, setIsProfileOpen] = useState(false); // Profile dropdown state
   const dropdownRef = useRef(null);
 
-  // বাইরে ক্লিক করলে প্রোফাইল ড্রপডাউন বন্ধ করার জন্য useEffect
+  const handleSignOut = async () => {
+    await authClient.signOut({
+      fetchOptions: {
+        onSuccess: () => {
+          router.push("/login"); // Logout hoye gele login page-e niye jabe
+        },
+      },
+    });
+  };
+
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
@@ -63,58 +77,68 @@ const Navbar = () => {
         {/* Desktop Actions */}
         <div className="hidden md:flex items-center gap-4 lg:gap-6 relative">
           {/* Profile Clickable Area */}
-          <div className="relative" ref={dropdownRef}>
-            <button
-              onClick={() => setIsProfileOpen(!isProfileOpen)}
-              className="flex gap-2 items-center text-gray-600 hover:text-[#febe74] group transition-colors focus:outline-none"
-            >
-              <Avatar src={user.avatarSrc} name={user.name} className="w-9 h-9 text-xs border-2 border-transparent group-hover:border-[#febe74] transition-all cursor-pointer" />
-              <p className="text-sm font-semibold text-[#279608] group-hover:text-[#febe74]">Profile</p>
-            </button>
 
-            {/* Profile Dropdown Menu */}
-            {isProfileOpen && (
-              <div className="absolute right-0 mt-3 w-64 bg-white rounded-2xl shadow-xl border border-gray-100 py-4 px-4 flex flex-col gap-3 animate-in fade-in slide-in-from-top-2 duration-200">
-                {/* User Info Header */}
-                <div className="flex items-center gap-3 border-b border-gray-100 pb-3">
-                  <Avatar src={user.avatarSrc} name={user.name} className="w-11 h-11 text-xs" />
-                  <div className="flex flex-col overflow-hidden">
-                    <span className="font-bold text-sm text-gray-800 truncate">{user.name}</span>
-                    <span className="text-xs text-gray-400 truncate">{user.email}</span>
+          {session?.user ? (
+            <div className="relative" ref={dropdownRef}>
+              <button
+                onClick={() => setIsProfileOpen(!isProfileOpen)}
+                className="flex gap-2 items-center text-gray-600 hover:text-[#febe74] group transition-colors focus:outline-none"
+              >
+                <Image
+                  src={session?.user.image}
+                  width={100}
+                  height={100}
+                  alt={session?.user.name}
+                  className="w-12 h-12 text-xs border-2 border-transparent group-hover:border-[#febe74] transition-all cursor-pointer rounded-full"
+                />
+                <span>{session?.user.name}</span>
+              </button>
+
+              {/* Profile Dropdown Menu */}
+              {isProfileOpen && (
+                <div className="absolute right-0 mt-3 w-64 bg-white rounded-2xl shadow-xl border border-gray-100 py-4 px-4 flex flex-col gap-3 animate-in fade-in slide-in-from-top-2 duration-200">
+                  {/* User Info Header */}
+                  <div className="flex items-center gap-3 border-b border-gray-100 pb-3">
+                    <Image src={session?.user.image} width={100} height={100} alt={session?.user.name} className="w-12 h-12 text-xs" />
+                    <div className="flex flex-col overflow-hidden">
+                      <span className="font-bold text-sm text-gray-800 truncate">{session?.user.name}</span>
+                      <span className="text-xs text-gray-400 truncate">{session?.user.email}</span>
+                    </div>
                   </div>
-                </div>
 
-                {/* Dropdown Links */}
-                <div className="flex flex-col text-sm font-medium text-gray-600">
-                  <Link href="/profile" onClick={() => setIsProfileOpen(false)} className="flex items-center gap-2 px-2 py-2 hover:bg-gray-50 rounded-xl transition">
-                    <User className="w-4 h-4 text-gray-400" />
-                    <span>My Account</span>
-                  </Link>
-                  <Link href="/dashboard" onClick={() => setIsProfileOpen(false)} className="flex items-center gap-2 px-2 py-2 hover:bg-gray-50 rounded-xl transition">
-                    <Settings className="w-4 h-4 text-gray-400" />
-                    <span>Dashboard</span>
-                  </Link>
-                </div>
+                  {/* Dropdown Links */}
+                  <div className="flex flex-col text-sm font-medium text-gray-600">
+                    <Link href="/dashboard" onClick={() => setIsProfileOpen(false)} className="flex items-center gap-2 px-2 py-2 hover:bg-gray-50 rounded-xl transition">
+                      <RxDashboard className="w-4 h-4 text-gray-400" />
+                      <span>Dashboard</span>
+                    </Link>
+                  </div>
 
-                {/* Logout Button */}
-                <button className="w-full flex items-center gap-2 px-2 py-2 text-sm font-bold text-red-500 hover:bg-red-50 rounded-xl transition text-left mt-1">
-                  <LogOut className="w-4 h-4" />
-                  <span>Logout</span>
+                  {/* Logout Button */}
+                  <button
+                    onClick={handleSignOut}
+                    className="w-full flex items-center gap-2 px-2 py-2 text-sm font-bold text-red-500 hover:bg-red-50 rounded-xl transition text-left mt-1"
+                  >
+                    <LogOut className="w-4 h-4" />
+                    <span>Logout</span>
+                  </button>
+                </div>
+              )}
+            </div>
+          ) : (
+            <>
+              <Link href="/login">
+                <button className="flex items-center bg-linear-to-r from-[#f7947d] to-[#ffaf9d] text-white px-5 py-2 rounded-full text-sm font-bold shadow-md shadow-orange-200/50 hover:scale-105 active:scale-[0.98] transition">
+                  Login
                 </button>
-              </div>
-            )}
-          </div>
-
-          <Link href="/login">
-            <button className="flex items-center bg-linear-to-r from-[#f7947d] to-[#ffaf9d] text-white px-5 py-2 rounded-full text-sm font-bold shadow-md shadow-orange-200/50 hover:scale-105 active:scale-[0.98] transition">
-              Login
-            </button>
-          </Link>
-          <Link href="/signUp">
-            <button className="flex items-center bg-linear-to-r from-[#f7947d] to-[#ffaf9d] text-white px-5 py-2 rounded-full text-sm font-bold shadow-md shadow-orange-200/50 hover:scale-105 active:scale-[0.98] transition">
-              Sign up
-            </button>
-          </Link>
+              </Link>
+              <Link href="/signUp">
+                <button className="flex items-center bg-linear-to-r from-[#f7947d] to-[#ffaf9d] text-white px-5 py-2 rounded-full text-sm font-bold shadow-md shadow-orange-200/50 hover:scale-105 active:scale-[0.98] transition">
+                  Sign up
+                </button>
+              </Link>
+            </>
+          )}
         </div>
 
         {/* Mobile Hamburger Trigger */}
@@ -144,32 +168,41 @@ const Navbar = () => {
           <div className="h-px bg-gray-100 my-1" />
 
           {/* Mobile Profile Card */}
-          <div className="flex flex-col bg-gray-50/50 rounded-2xl p-3 border border-gray-100/50 gap-3">
-            <div className="flex gap-3 items-center">
-              <Avatar src={user.avatarSrc} name={user.name} className="w-10 h-10 text-xs" />
-              <div className="flex flex-col overflow-hidden">
-                <p className="text-sm font-bold text-gray-800 truncate">{user.name}</p>
-                <p className="text-xs text-gray-400 truncate">{user.email}</p>
+          {session?.user ? (
+            <>
+              <div className="flex flex-col bg-gray-50/50 rounded-2xl p-3 border border-gray-100/50 gap-3">
+                <div className="flex gap-3 items-center">
+                  <Image width={100} height={100} alt={session?.user.name} src={session?.user.image} className="w-12 h-12 text-xs" />
+                  <div className="flex flex-col overflow-hidden">
+                    <p className="text-sm font-bold text-gray-800 truncate">{session?.user.name}</p>
+                    <p className="text-xs text-gray-400 truncate">{session?.user.email}</p>
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-2 gap-2 text-center text-xs font-bold mt-1">
+                  <Link href="/profile" onClick={() => setIsOpen(false)} className="bg-white border border-gray-100 py-2 rounded-xl text-gray-600 hover:bg-gray-50">
+                    Dashboard
+                  </Link>
+                  <button onClick={handleSignOut} className="bg-red-50 w-full text-red-500 py-2 rounded-xl hover:bg-red-100/70 transition">
+                    Logout
+                  </button>
+                </div>
               </div>
-            </div>
-
-            <div className="grid grid-cols-2 gap-2 text-center text-xs font-bold mt-1">
-              <Link href="/profile" onClick={() => setIsOpen(false)} className="bg-white border border-gray-100 py-2 rounded-xl text-gray-600 hover:bg-gray-50">
-                My Profile
-              </Link>
-              <Link href="/profile" onClick={() => setIsOpen(false)} className="bg-white border border-gray-100 py-2 rounded-xl text-gray-600 hover:bg-gray-50">
-                Dashboard
-              </Link>
-              <button className="bg-red-50 w-full text-red-500 py-2 rounded-xl hover:bg-red-100/70 transition">Logout</button>
-            </div>
-          </div>
-
-          <div className="grid grid-cols-2 gap-3 pt-1">
-            <Link href="/login"><button className="w-full text-center bg-gray-100 hover:bg-gray-200 text-gray-700 py-2.5 rounded-xl text-xs font-bold transition">Login</button></Link>
-            <Link href="/signUp">
-              <button className="w-full text-center bg-linear-to-r from-[#f7947d] to-[#ffaf9d] text-white py-2.5 rounded-xl text-xs font-bold transition shadow-sm">Sign up</button>
-            </Link>
-          </div>
+            </>
+          ) : (
+            <>
+              <div className="grid grid-cols-2 gap-3 pt-1">
+                <Link href="/login">
+                  <button className="w-full text-center bg-gray-100 hover:bg-gray-200 text-gray-700 py-2.5 rounded-xl text-xs font-bold transition">Login</button>
+                </Link>
+                <Link href="/signUp">
+                  <button className="w-full text-center bg-linear-to-r from-[#f7947d] to-[#ffaf9d] text-white py-2.5 rounded-xl text-xs font-bold transition shadow-sm">
+                    Sign up
+                  </button>
+                </Link>
+              </div>
+            </>
+          )}
         </div>
       </div>
     </nav>

@@ -11,8 +11,7 @@ import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 
 export default function RegisterPage() {
-
-  const router = useRouter()
+  const router = useRouter();
   const [showPassword, setShowPassword] = useState(true);
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -60,7 +59,9 @@ export default function RegisterPage() {
           </div>
         </div>
       ));
-      router.push('/login')
+      router.push("/login");
+    } else {
+      toast.error(error.message);
     }
   };
 
