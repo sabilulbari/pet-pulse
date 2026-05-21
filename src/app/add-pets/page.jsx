@@ -2,8 +2,12 @@
 import React, { useState } from "react";
 import { PawPrint, ShieldCheck, Calendar, ChevronDown, CheckCircle2, Image as ImageIcon, X, Lightbulb, RotateCcw, Lock } from "lucide-react";
 import Image from "next/image";
+import { authClient } from "@/lib/auth-client";
+import toast from "react-hot-toast";
 
 export default function AddPetForm() {
+  const { data: session } = authClient.useSession();
+
   // Main state object containing all field values
   const [formData, setFormData] = useState({
     petName: "Milo",
@@ -52,8 +56,11 @@ export default function AddPetForm() {
     });
 
     const data = await res.json();
-    console.log(data);
-
+    if (data.acknowledged) {
+      toast.success("Pet added successfully!");
+    } else {
+      toast.error("Failed to add pet. Please try again.");
+    }
   };
 
   return (
@@ -296,7 +303,7 @@ export default function AddPetForm() {
                   <input
                     type="email"
                     name="ownerEmail"
-                    value={formData.ownerEmail}
+                    value={session?.user.email}
                     onChange={handleChange}
                     readOnly
                     placeholder="e.g. john.doe@example.com"

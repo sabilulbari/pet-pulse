@@ -36,12 +36,6 @@ const Navbar = () => {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  const user = {
-    name: "John Doe",
-    email: "johndoe@example.com",
-    avatarSrc: "https://img.heroui.chat/image/avatar?w=400&h=400&u=3",
-  };
-
   return (
     <nav className="sticky top-0 z-50 backdrop-blur-lg bg-[#febe74]/10 border-b border-white/20 px-6 md:px-10 py-4 transition-all duration-300">
       <div className="max-w-7xl mx-auto flex items-center justify-between">
@@ -172,7 +166,7 @@ const Navbar = () => {
             <>
               <div className="flex flex-col bg-gray-50/50 rounded-2xl p-3 border border-gray-100/50 gap-3">
                 <div className="flex gap-3 items-center">
-                  <Image width={100} height={100} alt={session?.user.name} src={session?.user.image} className="w-12 h-12 text-xs" />
+                  <Image width={100} height={100} alt={session?.user?.name} src={session?.user.image} className="w-12 h-12 text-xs" />
                   <div className="flex flex-col overflow-hidden">
                     <p className="text-sm font-bold text-gray-800 truncate">{session?.user.name}</p>
                     <p className="text-xs text-gray-400 truncate">{session?.user.email}</p>

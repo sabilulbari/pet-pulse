@@ -1,9 +1,12 @@
 import PetDetailsCard from "@/app/components/petDetails/PetDetailsCard";
 import PetDetailsForm from "@/app/components/petDetails/PetDetailsForm";
+import { authClient } from "@/lib/auth-client";
 import { petDataById } from "@/lib/data";
 import { Share2, Heart, Shield, ArrowLeft, ArrowRight, Sparkles, ShieldCheck, FileText, Calendar, Weight, Users, Check, Lock, Palette } from "lucide-react";
 
 export default async function PetDetails({ params }) {
+  const { data: session } = await authClient.getSession();
+  const userData = session?.user;
   const { id } = await params;
   const petData = await petDataById(id);
   const { adoptionFee, age, breed, colorMarkings, gender, healthStatus, location, petBio, petName, species, _id, vaccineStatus } = petData;
@@ -106,7 +109,7 @@ export default async function PetDetails({ params }) {
           </div>
 
           {/* Interactive Form Controls */}
-          <PetDetailsForm />
+          <PetDetailsForm userData={userData} />
 
           {/* Privacy Note */}
           <div className="flex items-center justify-center gap-1.5 text-[11px] font-bold text-gray-400/80">
