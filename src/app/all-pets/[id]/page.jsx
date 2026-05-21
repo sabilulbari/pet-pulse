@@ -1,15 +1,19 @@
 import PetDetailsCard from "@/app/components/petDetails/PetDetailsCard";
 import PetDetailsForm from "@/app/components/petDetails/PetDetailsForm";
-import { authClient } from "@/lib/auth-client";
+import { auth } from "@/lib/auth";
 import { petDataById } from "@/lib/data";
 import { Share2, Heart, Shield, ArrowLeft, ArrowRight, Sparkles, ShieldCheck, FileText, Calendar, Weight, Users, Check, Lock, Palette } from "lucide-react";
+import { headers } from "next/headers";
 
 export default async function PetDetails({ params }) {
-  const { data: session } = await authClient.getSession();
+  const session = await auth.api.getSession({
+    headers: await headers(),
+  });
   const userData = session?.user;
   const { id } = await params;
   const petData = await petDataById(id);
-  const { adoptionFee, age, breed, colorMarkings, gender, healthStatus, location, petBio, petName, species, _id, vaccineStatus } = petData;
+  const { adoptionFee, age, breed, colorMarkings, gender, healthStatus, location, petBio, petName, species, _id, vaccineStatus, ownerEmail } = petData;
+  console.log(petData);
   return (
     <div className="min-h-screen bg-[#F5F6F8] px-4 py-8 md:p-8 flex justify-center items-center font-sans selection:bg-rose-100 selection:text-rose-700">
       <div className="max-w-6xl w-full grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
@@ -109,7 +113,7 @@ export default async function PetDetails({ params }) {
           </div>
 
           {/* Interactive Form Controls */}
-          <PetDetailsForm userData={userData} />
+          <PetDetailsForm userData={userData} petName={petName} ownerEmail={ownerEmail} />
 
           {/* Privacy Note */}
           <div className="flex items-center justify-center gap-1.5 text-[11px] font-bold text-gray-400/80">
