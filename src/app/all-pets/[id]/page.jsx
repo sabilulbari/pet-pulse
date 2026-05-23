@@ -13,7 +13,6 @@ export default async function PetDetails({ params }) {
   const { id } = await params;
   const petData = await petDataById(id);
   const { adoptionFee, age, breed, colorMarkings, gender, healthStatus, location, petBio, petName, species, _id, vaccineStatus, ownerEmail } = petData;
-  console.log(petData);
   return (
     <div className="min-h-screen bg-[#F5F6F8] px-4 py-8 md:p-8 flex justify-center items-center font-sans selection:bg-rose-100 selection:text-rose-700">
       <div className="max-w-6xl w-full grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">

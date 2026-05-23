@@ -8,29 +8,35 @@ const PetDetailsForm = ({ userData, petName, ownerEmail }) => {
     const formData = new FormData(e.target);
     const data = Object.fromEntries(formData.entries());
 
-    const res = await fetch("http://localhost:5000/adoptnow", {
-      method: "POST",
-      headers: {
-        "Content-type": "application/json",
-      },
-      body: JSON.stringify({
-        petName,
-        ownerEmail,
-        reqUserName: data.reqUserName,
-        reqUserEmail: data.reqUserEmail,
-        reqHomeAddress: data.reqHomeAddress,
-        reqHomeType: data.reqHomeType,
-        reqWhyAdopt: data.reqWhyAdopt,
-      }),
-    });
+    const isSameEmail = ownerEmail === data.reqUserEmail;
 
-    const result = await res.json();
+    if (!isSameEmail) {
+      const res = await fetch("http://localhost:5000/adoptnow", {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify({
+          petName,
+          ownerEmail,
+          reqUserName: data.reqUserName,
+          reqUserEmail: data.reqUserEmail,
+          reqHomeAddress: data.reqHomeAddress,
+          reqHomeType: data.reqHomeType,
+          reqWhyAdopt: data.reqWhyAdopt,
+        }),
+      });
 
-    if (result.acknowledged) {
-      toast.success("Adoption application submitted successfully!");
-      e.target.reset();
+      const result = await res.json();
+
+      if (result.acknowledged) {
+        toast.success("Adoption application submitted successfully!");
+        e.target.reset();
+      } else {
+        toast.error("Failed to submit application. Please try again.");
+      }
     } else {
-      toast.error("Failed to submit application. Please try again.");
+      toast.error("You can not adopt your pet");
     }
   };
   return (
