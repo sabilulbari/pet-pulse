@@ -1,5 +1,6 @@
 "use client";
 
+import { DateField, Label } from "@heroui/react";
 import toast from "react-hot-toast";
 
 const PetDetailsForm = ({ userData, petName, ownerEmail }) => {
@@ -19,11 +20,13 @@ const PetDetailsForm = ({ userData, petName, ownerEmail }) => {
         body: JSON.stringify({
           petName,
           ownerEmail,
+          userImage: userData.image,
+          status: "Pending",
+          pickupDate: data.date,
           reqUserName: data.reqUserName,
           reqUserEmail: data.reqUserEmail,
           reqHomeAddress: data.reqHomeAddress,
           reqHomeType: data.reqHomeType,
-          reqWhyAdopt: data.reqWhyAdopt,
         }),
       });
 
@@ -84,6 +87,7 @@ const PetDetailsForm = ({ userData, petName, ownerEmail }) => {
         <div className="space-y-1.5">
           <label className="text-xs font-bold text-gray-700 block">Home Address</label>
           <input
+            required
             type="text"
             name="reqHomeAddress"
             placeholder="Enter your address"
@@ -96,6 +100,7 @@ const PetDetailsForm = ({ userData, petName, ownerEmail }) => {
           <label className="text-xs font-bold text-gray-700 block">Tell us about your home</label>
           <div className="relative">
             <select
+              required
               name="reqHomeType"
               className="w-full bg-gray-50/60 border border-gray-100 rounded-xl px-4 py-3 text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-rose-500/20 focus:border-rose-500 focus:bg-white appearance-none transition duration-200 cursor-pointer"
             >
@@ -114,15 +119,14 @@ const PetDetailsForm = ({ userData, petName, ownerEmail }) => {
           </div>
         </div>
 
-        {/* Why adopt */}
+        {/* Pick up date */}
         <div className="space-y-1.5">
-          <label className="text-xs font-bold text-gray-700 block">Why do you want to adopt Milo?</label>
-          <textarea
-            name="reqWhyAdopt"
-            rows="3"
-            placeholder="Share a little about yourself..."
-            className="w-full bg-gray-50/60 border border-gray-100 rounded-xl px-4 py-3 text-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-rose-500/20 focus:border-rose-500 focus:bg-white transition duration-200 resize-none"
-          />
+          <DateField isRequired className="w-[256px]" name="date">
+            <Label>Pck up date</Label>
+            <DateField.Group>
+              <DateField.Input>{(segment) => <DateField.Segment segment={segment} />}</DateField.Input>
+            </DateField.Group>
+          </DateField>
         </div>
 
         {/* CTA Submit Button with Smooth Coral Gradient */}

@@ -12,7 +12,7 @@ export default async function PetDetails({ params }) {
   const userData = session?.user;
   const { id } = await params;
   const petData = await petDataById(id);
-  const { adoptionFee, age, breed, colorMarkings, gender, healthStatus, location, petBio, petName, species, _id, vaccineStatus, ownerEmail } = petData;
+  const { adoptionFee, age, breed, colorMarkings, gender, healthStatus, location, petBio, petName, species, _id, vaccineStatus, ownerEmail, imageUrl } = petData;
   return (
     <div className="min-h-screen bg-[#F5F6F8] px-4 py-8 md:p-8 flex justify-center items-center font-sans selection:bg-rose-100 selection:text-rose-700">
       <div className="max-w-6xl w-full grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
@@ -112,7 +112,7 @@ export default async function PetDetails({ params }) {
           </div>
 
           {/* Interactive Form Controls */}
-          <PetDetailsForm userData={userData} petName={petName} ownerEmail={ownerEmail} />
+          <PetDetailsForm userData={userData} petName={petName} ownerEmail={ownerEmail} imageUrl={imageUrl} />
 
           {/* Privacy Note */}
           <div className="flex items-center justify-center gap-1.5 text-[11px] font-bold text-gray-400/80">

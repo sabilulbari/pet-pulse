@@ -9,3 +9,9 @@ export const petDataById = async (id) => {
   const data = await res.json();
   return data;
 };
+
+export const adoptionRequestData = async (ownerEmail) => {
+  const res = await fetch(`http://localhost:5000/adoptnow/${ownerEmail}`);
+  const data = await res.json();
+  return data;
+};
