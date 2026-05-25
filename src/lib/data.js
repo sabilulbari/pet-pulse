@@ -15,3 +15,9 @@ export const adoptionRequestData = async (ownerEmail) => {
   const data = await res.json();
   return data;
 };
+
+// export const actionRequest = async (id) =>{
+//   const res = await fetch(`http://localhost:5000/adoptnow/actionReq/${id}`);
+//   const data = await res.json();
+//   return data;
+// }
