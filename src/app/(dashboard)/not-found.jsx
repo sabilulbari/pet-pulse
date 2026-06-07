@@ -18,7 +18,7 @@ export default function PetLoadingScreen() {
   );
 
   return (
-    <div className="min-h-screen w-full relative overflow-hidden flex flex-col items-center justify-center bg-gradient-to-br from-[#DCD4FA] via-[#FADCE5] to-[#FCE6CE] px-6 select-none">
+    <div className="min-h-screen w-full relative overflow-hidden flex flex-col items-center justify-center bg-linear-to-br from-[#DCD4FA] via-[#FADCE5] to-[#FCE6CE] px-6 select-none">
       {/* 1. Ambient Backdrop Decor (Sparkles, Clouds) */}
       <div className="absolute top-[22%] left-[18%] text-white/50 text-xl animate-pulse">✦</div>
       <div className="absolute top-[40%] right-[14%] text-white/60 text-2xl animate-pulse [animation-delay:0.3s]">✦</div>
@@ -86,7 +86,7 @@ export default function PetLoadingScreen() {
         </div>
 
         {/* 5. Trust and Safety Bottom Pill */}
-        <div className="inline-flex items-center gap-2 bg-white/30 backdrop-blur-md px-5 py-2.5 rounded-full border border-white/40 shadow-sm shadow-purple-900/[0.02]">
+        <div className="inline-flex items-center gap-2 bg-white/30 backdrop-blur-md px-5 py-2.5 rounded-full border border-white/40 shadow-sm shadow-purple-900/2">
           <Link
             href="/"
             className="inline-flex items-center justify-center gap-2 bg-white text-[#523A96] font-bold px-8 py-3.5 rounded-full border-2 border-[#9F8BE3] shadow-[0_0_25px_rgba(159,139,227,0.4)] hover:shadow-[0_0_35px_rgba(159,139,227,0.7)] hover:bg-[#523A96] hover:text-white hover:border-transparent transition-all duration-300 transform hover:-translate-y-0.5 active:translate-y-0 text-base"

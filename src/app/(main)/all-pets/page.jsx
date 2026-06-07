@@ -1,8 +1,8 @@
 import { Search } from "lucide-react";
-import Category from "../components/allPets/Category";
-import AllCard from "../components/allPets/AllCard";
-import BadgeSection from "../components/allPets/BadgeSection";
-import { allpetData } from "../../lib/data";
+import Category from "../../components/allPets/Category";
+import AllCard from "../../components/allPets/AllCard";
+import BadgeSection from "../../components/allPets/BadgeSection";
+import { allpetData } from "../../../lib/data";
 
 const PetMarketplace = async () => {
   const allPets = await allpetData();

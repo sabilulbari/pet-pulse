@@ -5,10 +5,10 @@ import Link from "next/link";
 import Image from "next/image";
 import { Mail, Lock, Eye, EyeOff, Heart, PawPrint, PawPrintIcon } from "lucide-react";
 import { FcGoogle } from "react-icons/fc";
-import { authClient } from "@/lib/auth-client";
 import toast from "react-hot-toast";
 import { IoCheckmarkDoneCircle } from "react-icons/io5";
 import { useRouter } from "next/navigation";
+import { authClient } from "@/lib/auth-client";
 
 export default function LoginPage() {
   const router = useRouter();

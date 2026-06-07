@@ -6,7 +6,7 @@ import { Eye, EyeOff, CheckCircle2, Lock, Mail, User, Image as ImageIcon, Shield
 import Image from "next/image";
 import { Button, Description, FieldError, Form, Input, InputGroup, Label, TextField } from "@heroui/react";
 import { BsEyeSlash } from "react-icons/bs";
-import { authClient } from "../../lib/auth-client";
+import { authClient } from "../../../lib/auth-client";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 

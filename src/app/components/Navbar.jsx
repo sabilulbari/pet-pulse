@@ -63,9 +63,6 @@ const Navbar = () => {
           <Link href="/my-requests" className="text-gray-600 hover:text-[#febe74] border-b-2 border-transparent hover:border-[#febe74] duration-200 pb-1">
             My Request
           </Link>
-          <Link href="/add-pets" className="text-gray-600 hover:text-[#febe74] border-b-2 border-transparent hover:border-[#febe74] duration-200 pb-1">
-            Add Pet
-          </Link>
         </div>
 
         {/* Desktop Actions */}
@@ -154,9 +151,6 @@ const Navbar = () => {
           </Link>
           <Link href="/my-requests" onClick={() => setIsOpen(false)} className="text-gray-600 hover:text-[#febe74] font-semibold text-sm py-1 border-b border-gray-50">
             My Request
-          </Link>
-          <Link href="/add-pets" onClick={() => setIsOpen(false)} className="text-gray-600 hover:text-[#febe74] font-semibold text-sm py-1 border-b border-gray-50">
-            Add Pet
           </Link>
 
           <div className="h-px bg-gray-100 my-1" />

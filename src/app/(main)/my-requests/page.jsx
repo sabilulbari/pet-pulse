@@ -1,6 +1,6 @@
 import React from "react";
 import { PawPrint } from "lucide-react";
-import MyRequest from "../components/MyRequest";
+import MyRequest from "../../components/MyRequest";
 import { adoptionRequestData } from "@/lib/data";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
