@@ -4,8 +4,12 @@ import { PawPrint, ShieldCheck, Calendar, ChevronDown, CheckCircle2, Image as Im
 import Image from "next/image";
 import { authClient } from "@/lib/auth-client";
 import toast from "react-hot-toast";
+import { redirect, useRouter } from "next/navigation";
 
 export default function AddPetForm() {
+
+  const router = useRouter()
+
   const { data: session } = authClient.useSession();
 
   // Main state object containing all field values
@@ -58,6 +62,8 @@ export default function AddPetForm() {
     const data = await res.json();
     if (data.acknowledged) {
       toast.success("Pet added successfully!");
+      router.refresh("/dashboard/my-listings");
+      redirect("/dashboard/my-listings");
     } else {
       toast.error("Failed to add pet. Please try again.");
     }
