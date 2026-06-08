@@ -23,6 +23,7 @@ const PetDetailsForm = ({ userData, petName, ownerEmail }) => {
           userImage: userData.image,
           status: "Pending",
           pickupDate: data.date,
+          applicationDate: new Date().toISOString().split("T")[0],
           reqUserName: data.reqUserName,
           reqUserEmail: data.reqUserEmail,
           reqHomeAddress: data.reqHomeAddress,

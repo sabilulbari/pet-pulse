@@ -23,7 +23,7 @@ const ListingCard = ({list}) => {
           <div className="flex justify-center items-center">
             <div className="flex justify-between gap-10">
               <div className="flex-col space-y-4">
-                <RequestButton />
+                <RequestButton list={list} />
                 <EditButton list={list} />
               </div>
               <div className="flex-col space-y-4">

@@ -1,11 +1,11 @@
 "use client";
 
 import { Button, Modal } from "@heroui/react";
-import { Users } from "lucide-react";
+import {Users } from "lucide-react";
 import { useCallback, useRef, useState } from "react";
-import MyRequest from "../MyRequest";
+import AdoptionReq from "./AdoptionReq";
 
-export function RequestButton() {
+export function RequestButton({ list }) {
   const portalRef = useRef(null);
   const [portalContainer, setPortalContainer] = useState(null);
 
@@ -24,17 +24,17 @@ export function RequestButton() {
               Requests
             </Button>
 
-            <Modal.Backdrop className="h-full" UNSTABLE_portalContainer={portalContainer}>
+            <Modal.Backdrop className="h-full " UNSTABLE_portalContainer={portalContainer}>
               <Modal.Container className="h-full max-h-full">
-                <Modal.Dialog className="h-full max-h-full sm:max-w-md">
+                <Modal.Dialog className="h-full max-h-full rounded-none w-[calc(100vw-100px)] max-w-none! mx-4  ">
                   <Modal.CloseTrigger />
 
                   <Modal.Header>
-                    <Modal.Heading>Custom Portal</Modal.Heading>
+                    <Modal.Heading>Check pet request</Modal.Heading>
                   </Modal.Header>
 
                   <Modal.Body>
-                    <MyRequest/>
+                    <AdoptionReq list={list} />
                   </Modal.Body>
 
                   <Modal.Footer>

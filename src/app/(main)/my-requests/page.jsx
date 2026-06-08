@@ -1,16 +1,16 @@
 import React from "react";
 import { PawPrint } from "lucide-react";
-import MyRequest from "../../components/MyRequest";
-import { adoptionRequestData } from "@/lib/data";
+import { myRequest } from "@/lib/data";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
+import MyRequest from "@/app/components/MyRequest";
 
 const AdoptionRequestsModal = async () => {
   const session = await auth.api.getSession({
     headers: await headers(),
   });
   const userEmail = session?.user?.email;
-  const adoptionRequests = await adoptionRequestData(userEmail);
+  const adoptionRequests = await myRequest(userEmail);
 
   return (
     // Glassmorphism Blurred Overlay Background
@@ -24,19 +24,10 @@ const AdoptionRequestsModal = async () => {
               <PawPrint className="w-5 h-5 text-indigo-600 fill-indigo-100" />
             </div>
             <div>
-              <h2 className="text-xl sm:text-2xl font-bold text-slate-800 tracking-tight">Adoption Requests</h2>
-              <p className="text-xs sm:text-sm text-slate-500 font-medium mt-0.5">Review and manage adoption requests from users.</p>
+              <h2 className="text-xl sm:text-2xl font-bold text-slate-800 tracking-tight">My Requests</h2>
+              <p className="text-xs sm:text-sm text-slate-500 font-medium mt-0.5">Check your Request</p>
             </div>
           </div>
-        </div>
-
-        {/* Table Headers - Hidden on Mobile/Tablet, visible on Desktop */}
-        <div className="hidden md:grid grid-cols-12 px-6 text-xs font-bold uppercase tracking-wider text-slate-400">
-          <div className="col-span-3">User</div>
-          <div className="col-span-3">Email</div>
-          <div className="col-span-2">Pickup Date</div>
-          <div className="col-span-2">Status</div>
-          <div className="col-span-2 text-right">Actions</div>
         </div>
 
         {/* Dynamic Data Rows / Cards */}

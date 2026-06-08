@@ -78,14 +78,6 @@ const Sidebar = () => {
           </div>
         </div>
 
-        {/* ৩. বটম সেকশন (Logout*/}
-        <div className="space-y-4 pt-4">
-          {/* লগআউট বাটন */}
-          <button className="w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-semibold text-[#EF4444] bg-[#FEE2E2]/40 hover:bg-[#FEE2E2]/80 transition-colors duration-200">
-            <LogOut className="w-4.5 h-4.5" />
-            <span>Logout</span>
-          </button>
-        </div>
       </div>
     </aside>
   );
