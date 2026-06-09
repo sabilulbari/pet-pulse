@@ -20,7 +20,7 @@ const Sidebar = () => {
   ];
 
   return (
-    <aside className="w-[30%] hidden md:flex  fixed h-screen  left-0 bg-[#F6F8FC] border-r border-slate-100 p-6 flex-col justify-between font-sans shrink-0">
+    <aside className=" md:fixed  w-full md:w-[30%] flex   md:h-screen  left-0 bg-[#F6F8FC] border-r border-slate-100 p-6  justify-between font-sans shrink-0">
       {/* ১. টপ হেডার / লোগো সেকশন */}
       <div className="container">
         <div>
@@ -34,14 +34,12 @@ const Sidebar = () => {
             </div>
           </div>
 
-          {/* ২. ডাইনামিক মেনু গ্রুপ */}
           <div className="space-y-6">
             {menuGroups.map((group, groupIdx) => (
               <div key={groupIdx} className="space-y-1.5">
                 <nav className="space-y-0.5">
                   {group.items.map((item, itemIdx) => {
                     const Icon = item.icon;
-                    // আপনি আপনার সঠিক রাউট দিয়ে এটি ম্যাচ করতে পারেন
                     const isActive = pathname === item.href || (group.title === "MAIN" && itemIdx === 0 && pathname === "/");
 
                     return (
@@ -58,17 +56,6 @@ const Sidebar = () => {
                           <Icon className={`w-4.5 h-4.5 transition-colors ${isActive ? "text-white" : "text-[#94A3B8] group-hover:text-[#475569]"}`} />
                           <span>{item.label}</span>
                         </div>
-
-                        {/* নোটিফিকেশন ব্যাজ (যদি থাকে) */}
-                        {item.badge && (
-                          <span
-                            className={`text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center ${
-                              isActive ? "bg-white text-[#8B73FF]" : "bg-[#C4B5FD]/30 text-[#7C3AED]"
-                            }`}
-                          >
-                            {item.badge}
-                          </span>
-                        )}
                       </Link>
                     );
                   })}
@@ -77,7 +64,6 @@ const Sidebar = () => {
             ))}
           </div>
         </div>
-
       </div>
     </aside>
   );

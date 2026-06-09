@@ -5,13 +5,13 @@ import { MdOutlinePets } from "react-icons/md";
 
 const Banner = () => {
   return (
-    <section className="relative w-full h-[80vh] flex items-center overflow-hidden bg-[#FDF9F7]">
+    <section className="relative w-full flex items-center overflow-hidden bg-[#FDF9F7] ">
       {/* Background Subtle Radial Gradient */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,var(--tw-gradient-stops))] from-orange-100 via-white to-white opacity-60" />
 
-      <div className="container mx-auto px-12 z-10 flex items-center justify-between">
+      <div className="container mx-auto px-12 z-10 flex  flex-col-reverse md:flex-row items-center justify-between">
         {/* Left Content */}
-        <div className="max-w-xl space-y-8">
+        <div className="max-w-xl space-y-8 text-center pt-4">
           <h1 className="text-7xl  text-[#1e293b] leading-[0.95]">
             A Friend <br />
             <span className="text-[#f7947d]">Is Waiting</span> <br />
@@ -20,13 +20,13 @@ const Banner = () => {
 
           <p className="text-lg text-gray-600 max-w-md">Thousands of adorable pets are looking for a loving home. Adopt today and find your loyal companion.</p>
 
-          <Link href={'/all-pets'}>
-            <button  className="flex items-center gap-3 cursor-pointer bg-linear-to-r from-[#f7947d] to-[#ffaf9d] text-white px-8 py-4 rounded-full font-semibold shadow-lg shadow-orange-200 hover:scale-105 transition-transform">
+          <Link className="flex justify-center items-center" href={"/all-pets"}>
+            <button className="flex items-center gap-3 cursor-pointer bg-linear-to-r from-[#f7947d] to-[#ffaf9d] text-white px-8 py-4 rounded-full font-semibold shadow-lg shadow-orange-200 hover:scale-105 transition-transform">
               <span className="bg-white/20 p-1 rounded-full">
                 <MdOutlinePets />
-            </span>
-            Adopt Now &gt;
-          </button>
+              </span>
+              Adopt Now &gt;
+            </button>
           </Link>
 
           {/* Feature Badges */}

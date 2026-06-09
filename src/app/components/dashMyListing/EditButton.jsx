@@ -72,6 +72,7 @@ export function EditButton({ list }) {
     });
 
     const data = await res.json();
+    console.log(data);
     if (data.modifiedCount > 0) {
       toast.success("Pet details data Updated!");
       router.refresh("/dashboard/my-listings");
@@ -92,7 +93,7 @@ export function EditButton({ list }) {
       <div ref={setPortalRef} className="relative flex  items-center">
         {!!portalContainer && (
           <Modal>
-            <Button variant="secondary" className={"w-30 text-blue-500 bg-blue-100/70 hover:bg-blue-100"}>
+            <Button variant="secondary" className={"w-25 text-blue-500 bg-blue-100/70 hover:bg-blue-100"}>
               <SquarePen />
               Edit
             </Button>

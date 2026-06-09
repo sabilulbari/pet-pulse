@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import { usePathname } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import { Avatar } from "@heroui/react";
@@ -11,10 +12,13 @@ import { useRouter } from "next/navigation";
 
 const Navbar = () => {
   const router = useRouter();
+  const pathname = usePathname();
   const { data: session } = authClient.useSession();
   const [isOpen, setIsOpen] = useState(false); // Mobile menu state
   const [isProfileOpen, setIsProfileOpen] = useState(false); // Profile dropdown state
   const dropdownRef = useRef(null);
+
+  const isActive = (href) => pathname === href;
 
   const handleSignOut = async () => {
     await authClient.signOut({
@@ -54,13 +58,22 @@ const Navbar = () => {
 
         {/* Desktop Navigation Links */}
         <div className="hidden md:flex items-center gap-6 lg:gap-8 text-gray-600 font-semibold text-sm">
-          <Link href="/" className="text-[#279608] hover:text-[#febe74] border-b-2 border-transparent hover:border-[#febe74] duration-200 pb-1">
+          <Link
+            href="/"
+            className={`${isActive("/") ? "text-[#279608] border-b-2 border-[#279608]" : "text-gray-600 border-b-2 border-transparent hover:text-[#febe74] hover:border-[#febe74]"} duration-200 pb-1`}
+          >
             Home
           </Link>
-          <Link href="/all-pets" className="text-gray-600 hover:text-[#febe74] border-b-2 border-transparent hover:border-[#febe74] duration-200 pb-1">
+          <Link
+            href="/all-pets"
+            className={`${isActive("/all-pets") ? "text-[#279608] border-b-2 border-[#279608]" : "text-gray-600 border-b-2 border-transparent hover:text-[#febe74] hover:border-[#febe74]"} duration-200 pb-1`}
+          >
             All Pets
           </Link>
-          <Link href="/my-requests" className="text-gray-600 hover:text-[#febe74] border-b-2 border-transparent hover:border-[#febe74] duration-200 pb-1">
+          <Link
+            href="/my-requests"
+            className={`${isActive("/my-requests") ? "text-[#279608] border-b-2 border-[#279608]" : "text-gray-600 border-b-2 border-transparent hover:text-[#febe74] hover:border-[#febe74]"} duration-200 pb-1`}
+          >
             My Request
           </Link>
         </div>
@@ -143,13 +156,25 @@ const Navbar = () => {
       {/* Mobile Dropdown Panel */}
       <div className={`md:hidden overflow-hidden transition-all duration-300 ease-in-out ${isOpen ? "max-h-130 opacity-100 mt-4" : "max-h-0 opacity-0 pointer-events-none"}`}>
         <div className="bg-white/90 backdrop-blur-md rounded-2xl p-5 border border-gray-100 shadow-xl flex flex-col gap-4">
-          <Link href="/" onClick={() => setIsOpen(false)} className="text-[#279608] font-bold text-sm py-1 border-b border-gray-50">
+          <Link
+            href="/"
+            onClick={() => setIsOpen(false)}
+            className={`${isActive("/") ? "text-[#279608] font-bold border-b-2 border-[#279608]" : "text-gray-600 hover:text-[#febe74] font-semibold border-b border-gray-50"} text-sm py-1`}
+          >
             Home
           </Link>
-          <Link href="/all-pets" onClick={() => setIsOpen(false)} className="text-gray-600 hover:text-[#febe74] font-semibold text-sm py-1 border-b border-gray-50">
+          <Link
+            href="/all-pets"
+            onClick={() => setIsOpen(false)}
+            className={`${isActive("/all-pets") ? "text-[#279608] font-bold border-b-2 border-[#279608]" : "text-gray-600 hover:text-[#febe74] font-semibold border-b border-gray-50"} text-sm py-1`}
+          >
             All Pets
           </Link>
-          <Link href="/my-requests" onClick={() => setIsOpen(false)} className="text-gray-600 hover:text-[#febe74] font-semibold text-sm py-1 border-b border-gray-50">
+          <Link
+            href="/my-requests"
+            onClick={() => setIsOpen(false)}
+            className={`${isActive("/my-requests") ? "text-[#279608] font-bold border-b-2 border-[#279608]" : "text-gray-600 hover:text-[#febe74] font-semibold border-b border-gray-50"} text-sm py-1`}
+          >
             My Request
           </Link>
 
@@ -168,7 +193,7 @@ const Navbar = () => {
                 </div>
 
                 <div className="grid grid-cols-2 gap-2 text-center text-xs font-bold mt-1">
-                  <Link href="/profile" onClick={() => setIsOpen(false)} className="bg-white border border-gray-100 py-2 rounded-xl text-gray-600 hover:bg-gray-50">
+                  <Link href="/dashboard" onClick={() => setIsOpen(false)} className="bg-white border border-gray-100 py-2 rounded-xl text-gray-600 hover:bg-gray-50">
                     Dashboard
                   </Link>
                   <button onClick={handleSignOut} className="bg-red-50 w-full text-red-500 py-2 rounded-xl hover:bg-red-100/70 transition">

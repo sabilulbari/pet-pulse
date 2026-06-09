@@ -105,7 +105,7 @@ const PetDetailsForm = ({ userData, petName, ownerEmail }) => {
               name="reqHomeType"
               className="w-full bg-gray-50/60 border border-gray-100 rounded-xl px-4 py-3 text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-rose-500/20 focus:border-rose-500 focus:bg-white appearance-none transition duration-200 cursor-pointer"
             >
-              <option value="" disabled selected>
+              <option disabled selected>
                 Select an option
               </option>
               <option value="house-yard">House with fenced yard</option>

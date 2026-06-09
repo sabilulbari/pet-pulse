@@ -1,13 +1,78 @@
+"use client";
+
 import { Search } from "lucide-react";
-import Category from "../../components/allPets/Category";
+import { useState, useEffect } from "react";
 import AllCard from "../../components/allPets/AllCard";
 import BadgeSection from "../../components/allPets/BadgeSection";
 import { allpetData } from "../../../lib/data";
+import PetLoader from "@/app/loading";
 
-const PetMarketplace = async () => {
-  const allPets = await allpetData();
+const PetMarketplace = () => {
+  const [allPets, setAllPets] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [filteredPets, setFilteredPets] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [activeTab, setActiveTab] = useState("all");
 
-  console.log(allPets);
+  const categories = [
+    { id: "all", label: "All Pets", icon: "🐾" },
+    { id: "dog", label: "Dog", icon: "🐶" },
+    { id: "cat", label: "Cat", icon: "🐱" },
+    { id: "bird", label: "Bird", icon: "🦜" },
+    { id: "rabbit", label: "Rabbit", icon: "🐰" },
+  ];
+
+  // Fetch all pets data
+  useEffect(() => {
+    const fetchPets = async () => {
+      try {
+        const pets = await allpetData();
+        setAllPets(pets);
+        setFilteredPets(pets);
+        setLoading(false);
+      } catch (error) {
+        console.error("Error fetching pets:", error);
+        setLoading(false);
+      }
+    };
+    fetchPets();
+  }, []);
+
+  // Handle search functionality
+  const handleSearch = (query) => {
+    setSearchQuery(query);
+    applyFilters(query, activeTab);
+  };
+
+  // Handle category filter
+  const handleCategoryChange = (categoryId) => {
+    setActiveTab(categoryId);
+    applyFilters(searchQuery, categoryId);
+  };
+
+  // Apply both search and category filters
+  const applyFilters = (query, category) => {
+    let filtered = allPets;
+
+    // Filter by category/species
+    if (category !== "all") {
+      filtered = filtered.filter((pet) => {
+        const petSpecies = (pet.species || pet.type || pet.category || "").toLowerCase();
+        return petSpecies === category.toLowerCase();
+      });
+    }
+
+    // Filter by search query (petName)
+    if (query) {
+      filtered = filtered.filter((pet) => pet.petName?.toLowerCase().includes(query.toLowerCase()));
+    }
+
+    setFilteredPets(filtered);
+  };
+
+  if (loading) {
+    return <div className="min-h-screen flex items-center justify-center"><PetLoader/></div>;
+  }
 
   return (
     <div className="min-h-screen bg-[#F9F9FC] text-[#2D3142] font-sans relative overflow-hidden">
@@ -32,20 +97,44 @@ const PetMarketplace = async () => {
               type="text"
               placeholder="Search pets by breed, name, or keywords..."
               className="w-full pl-3 pr-4 py-2.5 text-sm text-gray-700 bg-transparent placeholder-gray-400 focus:outline-none"
+              value={searchQuery}
+              onChange={(e) => handleSearch(e.target.value)}
             />
           </div>
         </div>
 
         {/* 4. Category Filter Tabs & Sort Dropdown */}
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-8 border-b border-gray-100/80 pb-5">
-          <Category />
+          <div className="flex flex-wrap gap-2.5">
+            {categories.map((tab) => (
+              <button
+                key={tab.id}
+                onClick={() => handleCategoryChange(tab.id)}
+                className={`px-5 py-2 rounded-xl text-xs font-bold transition-all duration-200 flex items-center gap-1.5 border ${
+                  activeTab === tab.id
+                    ? "bg-purple-50 border-purple-200 text-purple-700 shadow-sm shadow-purple-100/50"
+                    : "bg-white border-gray-200/60 text-gray-600 hover:border-purple-200 hover:bg-purple-50/30"
+                }`}
+              >
+                <span>{tab.icon}</span>
+                {tab.label}
+              </button>
+            ))}
+          </div>
         </div>
 
         {/* 5. Product Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-          {allPets.map((pet, index) => (
-            <AllCard key={index} pet={pet} />
-          ))}
+          {filteredPets.length > 0 ? (
+            filteredPets.map((pet, index) => <AllCard key={index} pet={pet} />)
+          ) : (
+            <div className="col-span-full text-center py-10">
+              <p className="text-gray-500 text-lg">
+                No pets found {searchQuery && `matching "${searchQuery}"`}
+                {activeTab !== "all" && ` in ${categories.find((c) => c.id === activeTab)?.label}`}
+              </p>
+            </div>
+          )}
         </div>
 
         {/* 6. Bottom Trust Badges Feature Section */}

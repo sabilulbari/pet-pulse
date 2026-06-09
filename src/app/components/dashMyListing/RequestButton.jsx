@@ -19,7 +19,7 @@ export function RequestButton({ list }) {
       <div ref={setPortalRef} className="relative flex  items-center">
         {!!portalContainer && (
           <Modal>
-            <Button variant="secondary" className={"w-30 text-green-500 bg-green-100/70 hover:bg-green-100"}>
+            <Button variant="secondary" className={"w-25  text-green-500 bg-green-100/70 hover:bg-green-100"}>
               <Users />
               Requests
             </Button>

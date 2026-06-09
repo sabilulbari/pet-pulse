@@ -11,26 +11,22 @@ import { DeleteButton } from "./DeleteButton";
 const ListingCard = ({list}) => {
     const { petName, adoptionFee, imageUrl, _id } = list;
   return (
-    <div>
-      <div>
-        <div className="relative aspect-4/3 w-full bg-gray-100 overflow-hidden mb-4">
-          <Image className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src={imageUrl} width={300} height={200} alt={petName} />
-        </div>
-        <div className="space-y-2">
-          <h2 className="font-semibold text-2xl">{petName}</h2>
-          <p>Price: ${adoptionFee}</p>
+    <div className="mb-4 border shadow-lg">
+      <div className="relative w-full h-52  overflow-hidden ">
+        <Image className=" object-cover group-hover:scale-105 transition-transform duration-500" src={imageUrl} fill alt={petName} />
+      </div>
+      <div className="space-y-2 p-2 ">
+        <h2 className="font-semibold text-2xl">{petName}</h2>
+        <p>Price: ${adoptionFee}</p>
 
-          <div className="flex justify-center items-center">
-            <div className="flex justify-between gap-10">
-              <div className="flex-col space-y-4">
-                <RequestButton list={list} />
-                <EditButton list={list} />
-              </div>
-              <div className="flex-col space-y-4">
-                <ViewButton _id={_id} />
-                <DeleteButton list={list} />
-              </div>
-            </div>
+        <div className=" flex gap-4  items-center justify-center">
+          <div className="flex-col space-y-4">
+            <RequestButton list={list} />
+            <EditButton list={list} />
+          </div>
+          <div className="flex-col space-y-4">
+            <ViewButton _id={_id} />
+            <DeleteButton list={list} />
           </div>
         </div>
       </div>

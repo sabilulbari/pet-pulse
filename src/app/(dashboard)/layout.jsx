@@ -15,13 +15,13 @@ export const metadata = {
 
 export default function DashboardLayout({ children }) {
   return (
-    <div className="flex bg-white h-screen">
+    <div className="flex flex-col md:flex-row bg-white h-screen">
       {/* বাম পাশের ফিক্সড সাইডবার */}
       <Sidebar />
 
       {/* ডান পাশের ডাইনামিক কন্টেন্ট এরিয়া */}
       <main className="flex-1   flex justify-center  md:justify-end">
-        <div className="bg-white min-w-[95%] md:min-w-[70%] min-h-[calc(100vh-64px)] shadow-sm border">{children}</div>
+        <div className="bg-white min-w-[95%] md:min-w-[70%] min-h-[calc(100vh-64px)] shadow-sm ">{children}</div>
       </main>
     </div>
   );

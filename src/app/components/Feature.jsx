@@ -2,6 +2,7 @@ import React from "react";
 import { Heart, ShieldCheck, Syringe, Sparkles, MapPin, ChevronRight } from "lucide-react";
 import FeatureCard from "./FeatureCard";
 import { allpetData } from "../../lib/data";
+import Link from "next/link";
 
 const Feature = async () => {
   const petData = await allpetData();
@@ -9,13 +10,15 @@ const Feature = async () => {
   return (
     <section className="bg-[#FAF9F7] py-20 px-6 lg:px-20">
       {/* Header */}
-      <div className="flex flex-col md:flex-row justify-between items-end mb-12">
+      <div className="flex justify-between mb-12">
         <div className="space-y-2">
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900">Featured Pet</h2>
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 ">Featured Pet</h2>
         </div>
-        <button className="mt-6 md:mt-0 flex items-center gap-2 bg-white px-6 py-3 rounded-full border border-gray-200 hover:border-rose-300 transition-all font-semibold shadow-sm">
-          View all pets <ChevronRight size={18} />
-        </button>
+        <Link href={"/all-pets"}>
+          <button className="flex items-center gap-2 bg-white px-6 py-3 rounded-full border border-gray-200 hover:border-rose-300 transition-all font-semibold shadow-sm cursor-pointer">
+            View all pets <ChevronRight size={18} />
+          </button>
+        </Link>
       </div>
 
       {/* Grid */}
