@@ -2,7 +2,6 @@ import { Button } from "@heroui/react";
 import { Plus, SquarePen, Users, View } from "lucide-react";
 import Image from "next/image";
 import React from "react";
-import { IoTrashBin } from "react-icons/io5";
 import { RequestButton } from "./RequestButton";
 import { EditButton } from "./EditButton";
 import { ViewButton } from "./ViewButton";

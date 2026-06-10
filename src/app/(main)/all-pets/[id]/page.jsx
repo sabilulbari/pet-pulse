@@ -1,7 +1,7 @@
 import PetDetailsCard from "@/app/components/petDetails/PetDetailsCard";
 import PetDetailsForm from "@/app/components/petDetails/PetDetailsForm";
 import { auth } from "@/lib/auth";
-import { petDataById } from "@/lib/data";
+import { allAdoptionRequest, petDataById } from "@/lib/data";
 import { Share2, Heart, Shield, ArrowLeft, ArrowRight, Sparkles, ShieldCheck, FileText, Calendar, Weight, Users, Check, Lock, Palette } from "lucide-react";
 import { headers } from "next/headers";
 
@@ -12,7 +12,12 @@ export default async function PetDetails({ params }) {
   const userData = session?.user;
   const { id } = await params;
   const petData = await petDataById(id);
-  const { adoptionFee, age, breed, colorMarkings, gender, healthStatus, location, petBio, petName, species, _id, vaccineStatus, ownerEmail, imageUrl } = petData;
+
+  // const res = await fetch(`http://localhost:5000/all-pets/allAdoptReq/${id}`);
+  // const data =await res.json()
+
+
+  const { adoptionFee, age, breed, colorMarkings, gender, healthStatus, location, petBio, petName, species, _id, vaccineStatus, ownerEmail, imageUrl, status } = petData;
   return (
     <div className="min-h-screen bg-[#F5F6F8] px-4 py-8 md:p-8 flex justify-center items-center font-sans selection:bg-rose-100 selection:text-rose-700">
       <div className="max-w-6xl w-full grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
@@ -92,34 +97,40 @@ export default async function PetDetails({ params }) {
               <p className="text-xs text-gray-400 font-medium">Give {petName} the loving home he deserves.</p>
             </div>
           </div>
-
           {/* Beautiful Glassmorphism Adoption Fee Box */}
-          <div className="relative overflow-hidden bg-linear-to-br from-amber-500/4 to-rose-500/4 rounded-2xl border border-amber-500/10 p-4 flex items-start gap-4">
-            <div className="p-2 bg-white rounded-xl shadow-sm border border-amber-100 text-rose-500 self-center">
-              <Heart className="w-5 h-5 fill-current" />
+          {status == "Approved" ? (
+            <div className="relative overflow-hidden bg-linear-to-br from-amber-500/4 to-rose-500/4 rounded-2xl border border-amber-500/10 p-4 flex items-start gap-4">
+              <div className="p-2 bg-white rounded-xl shadow-sm border border-amber-100 text-rose-500 self-center">
+                <Heart className="w-5 h-5 fill-current" />
+              </div>
+              <div>
+                <span className="text-2xl font-black text-[#11142D]">This Pet is adopted</span>
+              </div>
             </div>
-            <div>
-              <span className="text-[10px] uppercase tracking-wider text-gray-400 font-bold block mb-0.5">Adoption Fee</span>
-              <span className="text-2xl font-black text-[#11142D]">${adoptionFee}</span>
-              <p className="text-[11px] text-gray-400 font-medium leading-normal mt-1">The adoption fee helps cover medical care, vaccinations, and shelter support.</p>
+          ) : (
+            <div className="relative overflow-hidden bg-linear-to-br from-amber-500/4 to-rose-500/4 rounded-2xl border border-amber-500/10 p-4 flex items-start gap-4">
+              <div className="p-2 bg-white rounded-xl shadow-sm border border-amber-100 text-rose-500 self-center">
+                <Heart className="w-5 h-5 fill-current" />
+              </div>
+              <div>
+                <span className="text-[10px] uppercase tracking-wider text-gray-400 font-bold block mb-0.5">Adoption Fee</span>
+                <span className="text-2xl font-black text-[#11142D]">${adoptionFee}</span>
+                <p className="text-[11px] text-gray-400 font-medium leading-normal mt-1">The adoption fee helps cover medical care, vaccinations, and shelter support.</p>
+              </div>
             </div>
-          </div>
+          )}
 
           {/* Divider with Subtitle */}
           <div className="pt-2">
             <h3 className="text-sm font-extrabold text-[#11142D]">Adoption Application</h3>
             <p className="text-[11px] text-gray-400 font-medium">Please fill out the form below to start the adoption process.</p>
           </div>
-
           {/* Interactive Form Controls */}
-          <PetDetailsForm userData={userData} petName={petName} ownerEmail={ownerEmail} imageUrl={imageUrl} />
-
-          {/* Privacy Note */}
+          {status !== "Approved" && <PetDetailsForm petId={_id} userData={userData} petName={petName} ownerEmail={ownerEmail} imageUrl={imageUrl} />}
           <div className="flex items-center justify-center gap-1.5 text-[11px] font-bold text-gray-400/80">
             <Lock className="w-3.5 h-3.5" />
             <span>Your information is secure and private.</span>
           </div>
-
           {/* Footer Sweet Note */}
           <div className="border-t border-gray-50 pt-4 text-center space-y-0.5">
             <p className="text-[11px] font-bold text-rose-500/90 flex items-center justify-center gap-1">

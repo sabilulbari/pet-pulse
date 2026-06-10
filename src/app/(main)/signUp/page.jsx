@@ -29,6 +29,7 @@ export default function RegisterPage() {
       password: inputData.userPassword, // required
       rememberMe: true,
     });
+    await authClient.signOut();
     console.log(data);
 
     if (data) {

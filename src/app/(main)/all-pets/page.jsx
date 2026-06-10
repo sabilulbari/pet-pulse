@@ -8,6 +8,9 @@ import { allpetData } from "../../../lib/data";
 import PetLoader from "@/app/loading";
 
 const PetMarketplace = () => {
+
+  
+
   const [allPets, setAllPets] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredPets, setFilteredPets] = useState([]);

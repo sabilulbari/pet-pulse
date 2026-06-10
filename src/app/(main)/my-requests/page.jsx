@@ -12,6 +12,8 @@ const AdoptionRequestsModal = async () => {
   const userEmail = session?.user?.email;
   const adoptionRequests = await myRequest(userEmail);
 
+  
+
   return (
     // Glassmorphism Blurred Overlay Background
     <div className="bg-linear-to-r from-[#f7937dac]/30 to-[#ffaf9db0]/30 backdrop-blur-md flex items-center justify-center p-2 sm:p-4 md:p-6 font-sans min-h-screen">

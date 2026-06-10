@@ -23,7 +23,7 @@ export default function LoginPage() {
       email: inputData.email,
       password: inputData.password,
     });
-    console.log(data, error);
+
 
     if (data) {
       toast.custom((t) => (
@@ -60,9 +60,14 @@ export default function LoginPage() {
       toast.error(error.message);
     }
   };
+  const handleGoogleSignIn = async () => {
+    const data = await authClient.signIn.social({
+      provider: "google",
+    });
+  };
 
   return (
-    <div className="min-h-screen w-full bg-gradient-to-br from-[#FFF0E5] via-[#F4E3FF] to-[#E3F2FF] flex items-center justify-center p-4 relative overflow-hidden font-sans selection:bg-orange-200">
+    <div className="min-h-screen w-full bg-linear-to-br from-[#FFF0E5] via-[#F4E3FF] to-[#E3F2FF] flex items-center justify-center p-4 relative overflow-hidden font-sans selection:bg-orange-200">
       {/* Background Decorative Paw Prints */}
       <div className="absolute top-10 left-10 text-black/5 rotate-12 pointer-events-none hidden md:block">
         <PawPrint size={120} fill="currentColor" />
@@ -171,7 +176,7 @@ export default function LoginPage() {
           {/* Submit Button */}
           <button
             type="submit"
-            className="w-full bg-gradient-to-r from-[#FF7A60] to-[#FF6B54] hover:opacity-95 text-white font-bold py-4 px-6 rounded-2xl shadow-lg shadow-orange-500/15 transition-all duration-200 flex items-center justify-center gap-2 active:scale-[0.99] mt-2 text-sm"
+            className="w-full bg-linear-to-r from-[#FF7A60] to-[#FF6B54] hover:opacity-95 text-white font-bold py-4 px-6 rounded-2xl shadow-lg shadow-orange-500/15 transition-all duration-200 flex items-center justify-center gap-2 active:scale-[0.99] mt-2 text-sm"
           >
             Log in
             <PawPrint size={16} fill="currentColor" className="opacity-90" />
@@ -189,8 +194,8 @@ export default function LoginPage() {
         {/* OAuth Buttons */}
         <button
           type="button"
-          onClick={() => console.log("Google Login Clicked")}
-          className="w-full bg-white hover:bg-gray-50 text-[#3A3335] font-semibold py-3.5 px-6 rounded-2xl shadow-sm border border-gray-100 transition-all duration-200 flex items-center justify-center gap-3 active:scale-[0.99] text-sm"
+          onClick={handleGoogleSignIn}
+          className="w-full bg-white hover:bg-gray-50 text-[#3A3335] font-semibold py-3.5 px-6 rounded-2xl shadow-sm border border-gray-100 transition-all duration-200 flex items-center justify-center gap-3 active:scale-[0.99] text-sm cursor-pointer"
         >
           <FcGoogle size={20} />
           Continue with Google
