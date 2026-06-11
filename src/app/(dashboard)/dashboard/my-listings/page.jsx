@@ -13,7 +13,6 @@ const MyListing = async () => {
   });
   const myListing = await myListingData(ownerEmail, token);
 
-  console.log(myListing);
 
   return (
     <>

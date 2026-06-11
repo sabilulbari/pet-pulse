@@ -36,12 +36,12 @@ export const petDataById = async (id, token) => {
 
 export const myRequest = async (reqUserEmail, token) => {
   try {
-    const res = await fetch(`http://localhost:5000/adoptnow/my-request/${reqUserEmail}`,{
+    const res = await fetch(`http://localhost:5000/adoptnow/my-request/${reqUserEmail}`, {
       headers: {
         authorization: `Bearer ${token}`,
       },
       cache: "no-store",
-    })
+    });
     if (!res.ok) {
       throw new Error(`Failed to fetch requests: ${res.status}`);
     }
@@ -72,11 +72,12 @@ export const myListingData = async (ownerEmail, token) => {
   }
 };
 
-export const myAdoptionReq = async (petName, token) => {
+export const myAdoptionReq = async (petName, tokenData) => {
+  console.log(petName, tokenData.token);
   try {
     const res = await fetch(`http://localhost:5000/all-pets/my-listing/adoptReq/${petName}`, {
       headers: {
-        authorization: `Bearer ${token}`,
+        authorization: `Bearer ${tokenData.token}`,
       },
       cache: "no-store",
     });

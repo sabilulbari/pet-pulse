@@ -47,7 +47,9 @@ export default function AddPetForm() {
 
   // Form submit handler to log dataset to console
   const handleSubmit = async (e) => {
+    
     e.preventDefault();
+    const { data: tokenData } = await authClient.token();
     const fromData = new FormData(e.target);
     const addPets = Object.fromEntries(fromData.entries());
 
@@ -55,6 +57,7 @@ export default function AddPetForm() {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        authorization: `Bearer ${tokenData?.token}`,
       },
       body: JSON.stringify(addPets),
     });

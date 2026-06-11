@@ -10,21 +10,19 @@ const AdoptionReq = ({ list }) => {
   const userEmail = session?.user?.email;
 
   const { petName } = list;
-      const {data: token} = authClient.token()
-
 
   // 2. Data ebong loading state-er jonno state declare koro
   const [adoptionRequests, setAdoptionRequests] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // 3. useEffect diye asynchronous data fetch koro
   useEffect(() => {
     const fetchRequests = async () => {
       if (!userEmail) return;
 
       try {
         setLoading(true);
-        const data = await myAdoptionReq(petName, token);
+        const { data: tokenData } = await authClient.token();
+        const data = await myAdoptionReq(petName, tokenData);
         setAdoptionRequests(data || []);
       } catch (error) {
         console.error("Error fetching adoption requests:", error);
@@ -34,7 +32,7 @@ const AdoptionReq = ({ list }) => {
     };
 
     fetchRequests();
-  }, [userEmail]);
+  }, [petName, userEmail]);
 
   return (
     <div className="bg-linear-to-r from-[#f7937dac]/30 to-[#ffaf9db0]/30 backdrop-blur-md flex p-2  xl:p-6 font-sans  min-h-screen">

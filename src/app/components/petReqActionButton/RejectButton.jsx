@@ -1,4 +1,5 @@
 "use client";
+import { authClient } from "@/lib/auth-client";
 import { actionRequest } from "@/lib/data";
 import { AlertDialog, Button } from "@heroui/react";
 import { Check, XCircle } from "lucide-react";
@@ -15,11 +16,13 @@ const RejectButton = ({ request }) => {
   const rejectId = request._id;
 
   const handleApprove = async (rejectId) => {
+          const { data: tokenData } = await authClient.token();
     try {
       const res = await fetch(`http://localhost:5000/adoptnow/rejectReq/${rejectId}`, {
         method: "PATCH",
         headers: {
           "content-type": "application/json",
+          authorization: `Bearer ${tokenData?.token}`,
         },
       });
 

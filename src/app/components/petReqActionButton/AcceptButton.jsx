@@ -1,4 +1,5 @@
 "use client";
+import { authClient } from "@/lib/auth-client";
 import { actionRequest } from "@/lib/data";
 import { AlertDialog, Button } from "@heroui/react";
 import { Check } from "lucide-react";
@@ -11,15 +12,17 @@ const AcceptButton = ({ request }) => {
   const isPending = request.status === "Pending";
   const isApproved = request.status === "Approved";
 
-  const approveStatus = request.status;
   const approveId = request._id;
 
   const handleApprove = async (approveId) => {
+      const { data: tokenData } = await authClient.token();
+
     try {
       const res = await fetch(`http://localhost:5000/adoptnow/approveReq/${approveId}`, {
         method: "PATCH",
         headers: {
           "content-type": "application/json",
+          authorization: `Bearer ${tokenData?.token}`,
         },
       });
 

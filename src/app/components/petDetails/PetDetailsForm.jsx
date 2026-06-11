@@ -36,7 +36,6 @@ const PetDetailsForm = ({ userData, petName, ownerEmail, petId }) => {
       });
 
       const result = await res.json();
-
       if (result.acknowledged) {
         toast.success("Adoption application submitted successfully!");
         e.target.reset();
