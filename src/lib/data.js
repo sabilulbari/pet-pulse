@@ -1,3 +1,4 @@
+
 export const allpetData = async () => {
   try {
     const res = await fetch("http://localhost:5000/all-pets");
@@ -14,7 +15,11 @@ export const allpetData = async () => {
 
 export const petDataById = async (id) => {
   try {
-    const res = await fetch(`http://localhost:5000/all-pets/${id}`);
+    const res = await fetch(`http://localhost:5000/all-pets/${id}`,{
+      headers:{
+        authorization: "logIn"
+      }
+    })
     if (!res.ok) {
       throw new Error(`Failed to fetch pet: ${res.status}`);
     }

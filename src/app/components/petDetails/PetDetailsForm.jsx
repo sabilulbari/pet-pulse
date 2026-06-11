@@ -1,5 +1,6 @@
 "use client";
 
+import { authClient } from "@/lib/auth-client";
 import { DateField, Label } from "@heroui/react";
 import toast from "react-hot-toast";
 
@@ -11,11 +12,13 @@ const PetDetailsForm = ({ userData, petName, ownerEmail, petId }) => {
 
     const isSameEmail = ownerEmail === data.reqUserEmail;
 
+    const {data: tokenData} = await authClient.token()
     if (!isSameEmail) {
       const res = await fetch("http://localhost:5000/adoptnow", {
         method: "POST",
         headers: {
           "Content-type": "application/json",
+          authorization: `Bearer ${tokenData?.token}`
         },
         body: JSON.stringify({
           petName,
@@ -38,7 +41,7 @@ const PetDetailsForm = ({ userData, petName, ownerEmail, petId }) => {
         toast.success("Adoption application submitted successfully!");
         e.target.reset();
       } else {
-        toast.error("Failed to submit application. Please try again.");
+        toast.error(`Failed to submit application. Please try again.`);
       }
     } else {
       toast.error("You can not adopt your pet");
