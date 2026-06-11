@@ -30,7 +30,7 @@ const AcceptButton = ({ request }) => {
       console.log(data);
 
       if (data.modifiedCount > 0) {
-        router.refresh();
+        router.refresh("/dashboard/my-listings");
         toast.success("Approve successfully");
       }
     } catch (error) {

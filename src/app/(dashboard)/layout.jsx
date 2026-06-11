@@ -21,7 +21,7 @@ export default function DashboardLayout({ children }) {
 
       {/* ডান পাশের ডাইনামিক কন্টেন্ট এরিয়া */}
       <main className="flex-1   flex justify-center  md:justify-end">
-        <div className="bg-white min-w-[95%] md:min-w-[70%] min-h-[calc(100vh-64px)] shadow-sm ">{children}</div>
+        <div className="bg-white min-w-[95%] md:min-w-[70%] min-h-[calc(100vh-64px)] ">{children}</div>
       </main>
     </div>
   );

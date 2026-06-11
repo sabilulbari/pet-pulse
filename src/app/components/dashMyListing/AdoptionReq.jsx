@@ -4,6 +4,7 @@ import { PawPrint } from "lucide-react";
 import { myAdoptionReq } from "@/lib/data";
 import AdoptionRequest from "@/app/components/AdoptionRequest";
 import { authClient } from "@/lib/auth-client";
+import LoadingReq from "../LoadingReq";
 
 const AdoptionReq = ({ list }) => {
   const { data: session } = authClient.useSession();
@@ -55,7 +56,7 @@ const AdoptionReq = ({ list }) => {
         <div className="flex flex-col gap-4 ">
           {/* 4. Loading state handle koro */}
           {loading ? (
-            <div className="text-center py-4 text-slate-500">Loading requests...</div>
+            <div className="text-center py-4 text-slate-500"><LoadingReq/></div>
           ) : adoptionRequests.length === 0 ? (
             <div className="text-center py-4 text-slate-500">No requests found.</div>
           ) : (

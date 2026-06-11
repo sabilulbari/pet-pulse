@@ -4,7 +4,7 @@ import React from "react";
 
 export default function PetLoader({ text = "Fetching tail-wags..." }) {
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen w-full p-6 select-none">
+    <div className="flex flex-col items-center justify-center min-h-screen scale-50 md:scale-100 w-full p-6 select-none">
       {/* Container with soft ambient glow */}
       <div className="relative flex items-center justify-center w-28 h-28 mb-6">
         {/* Soft Background Pulse Ring */}
@@ -29,8 +29,6 @@ export default function PetLoader({ text = "Fetching tail-wags..." }) {
           </svg>
         </div>
       </div>
-
-      
     </div>
   );
 }

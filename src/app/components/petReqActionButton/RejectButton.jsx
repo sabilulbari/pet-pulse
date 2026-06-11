@@ -1,6 +1,5 @@
 "use client";
 import { authClient } from "@/lib/auth-client";
-import { actionRequest } from "@/lib/data";
 import { AlertDialog, Button } from "@heroui/react";
 import { Check, XCircle } from "lucide-react";
 import { useRouter } from "next/navigation";
@@ -30,7 +29,7 @@ const RejectButton = ({ request }) => {
       console.log(data);
 
       if (data.modifiedCount > 0) {
-        router.refresh();
+        router.refresh("/dashboard/my-listings");
         toast.success("Request has been rejected");
       }
     } catch (error) {
