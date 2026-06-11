@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import { PawPrint } from "lucide-react";
-import { adoptionRequestData, myAdoptionReq } from "@/lib/data";
+import { myAdoptionReq } from "@/lib/data";
 import AdoptionRequest from "@/app/components/AdoptionRequest";
 import { authClient } from "@/lib/auth-client";
 
@@ -10,6 +10,8 @@ const AdoptionReq = ({ list }) => {
   const userEmail = session?.user?.email;
 
   const { petName } = list;
+      const {data: token} = authClient.token()
+
 
   // 2. Data ebong loading state-er jonno state declare koro
   const [adoptionRequests, setAdoptionRequests] = useState([]);
@@ -22,7 +24,7 @@ const AdoptionReq = ({ list }) => {
 
       try {
         setLoading(true);
-        const data = await myAdoptionReq(petName);
+        const data = await myAdoptionReq(petName, token);
         setAdoptionRequests(data || []);
       } catch (error) {
         console.error("Error fetching adoption requests:", error);

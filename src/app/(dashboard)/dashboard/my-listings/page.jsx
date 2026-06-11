@@ -8,8 +8,10 @@ const MyListing = async () => {
     headers: await headers(),
   });
   const ownerEmail = session?.user?.email;
-
-  const myListing = await myListingData(ownerEmail);
+  const { token } = await auth.api.getToken({
+    headers: await headers(),
+  });
+  const myListing = await myListingData(ownerEmail, token);
 
   console.log(myListing);
 

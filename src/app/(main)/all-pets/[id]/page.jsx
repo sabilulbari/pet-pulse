@@ -1,6 +1,7 @@
 import PetDetailsCard from "@/app/components/petDetails/PetDetailsCard";
 import PetDetailsForm from "@/app/components/petDetails/PetDetailsForm";
 import { auth } from "@/lib/auth";
+import { petDataById } from "@/lib/data";
 import { Share2, Heart, Shield, ArrowLeft, ArrowRight, Sparkles, ShieldCheck, FileText, Calendar, Weight, Users, Check, Lock, Palette } from "lucide-react";
 import { headers } from "next/headers";
 
@@ -14,13 +15,9 @@ export default async function PetDetails({ params }) {
   const { token } = await auth.api.getToken({
     headers: await headers(),
   });
-  console.log(token, id);
-  const res = await fetch(`http://localhost:5000/all-pets/${id}`, {
-    headers: {
-      authorization: `Bearer ${token}`,
-    },
-  });
-  const petData = await res.json();
+
+  const petData = await petDataById(id, token);
+
 
 
   const { adoptionFee, age, breed, colorMarkings, gender, healthStatus, location, petBio, petName, species, _id, vaccineStatus, ownerEmail, imageUrl, status } = petData;

@@ -10,7 +10,11 @@ const AdoptionRequestsModal = async () => {
     headers: await headers(),
   });
   const userEmail = session?.user?.email;
-  const adoptionRequests = await myRequest(userEmail);
+
+  const { token } = await auth.api.getToken({
+    headers: await headers(),
+  });
+  const adoptionRequests = await myRequest(userEmail, token);
 
   return (
     // Glassmorphism Blurred Overlay Background

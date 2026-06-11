@@ -1,3 +1,4 @@
+import { authClient } from "./auth-client";
 
 export const allpetData = async () => {
   try {
@@ -13,55 +14,34 @@ export const allpetData = async () => {
   }
 };
 
-export const petDataById = async (id) => {
+export const petDataById = async (id, token) => {
   try {
-    const res = await fetch(`http://localhost:5000/all-pets/${id}`,{
-      headers:{
-        authorization: "logIn"
-      }
-    })
+    const res = await fetch(`http://localhost:5000/all-pets/${id}`, {
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
+      cache: "no-store",
+    });
+
     if (!res.ok) {
       throw new Error(`Failed to fetch pet: ${res.status}`);
     }
-    const data = await res.json();
-    return data || null;
+
+    return await res.json();
   } catch (error) {
-    console.error("Error fetching pet:", error);
+    console.error(error);
     return null;
   }
 };
 
-export const adoptionRequestData = async (ownerEmail) => {
+export const myRequest = async (reqUserEmail, token) => {
   try {
-    const res = await fetch(`http://localhost:5000/adoptnow/${ownerEmail}`);
-    if (!res.ok) {
-      throw new Error(`Failed to fetch adoption requests: ${res.status}`);
-    }
-    const data = await res.json();
-    return Array.isArray(data) ? data : [];
-  } catch (error) {
-    console.error("Error fetching adoption requests:", error);
-    return [];
-  }
-};
-
-export const allAdoptionRequest = async (id) => {
-  try {
-    const res = await fetch(`http://localhost:5000/all-pets/allAdoptReq/${id}`);
-    if (!res.ok) {
-      throw new Error("Failed to fetch adoption requests");
-    }
-    const text = await res.text();
-    return text ? JSON.parse(text) : [];
-  } catch (error) {
-    console.error("Error fetching adoption requests:", error);
-    return [];
-  }
-};
-
-export const myRequest = async (reqUserEmail) => {
-  try {
-    const res = await fetch(`http://localhost:5000/adoptnow/my-request/${reqUserEmail}`);
+    const res = await fetch(`http://localhost:5000/adoptnow/my-request/${reqUserEmail}`,{
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
+      cache: "no-store",
+    })
     if (!res.ok) {
       throw new Error(`Failed to fetch requests: ${res.status}`);
     }
@@ -73,9 +53,14 @@ export const myRequest = async (reqUserEmail) => {
   }
 };
 
-export const myListingData = async (ownerEmail) => {
+export const myListingData = async (ownerEmail, token) => {
   try {
-    const res = await fetch(`http://localhost:5000/all-pets/my-listing/${ownerEmail}`);
+    const res = await fetch(`http://localhost:5000/all-pets/my-listing/${ownerEmail}`, {
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
+      cache: "no-store",
+    });
     if (!res.ok) {
       throw new Error(`Failed to fetch listings: ${res.status}`);
     }
@@ -87,9 +72,14 @@ export const myListingData = async (ownerEmail) => {
   }
 };
 
-export const myAdoptionReq = async (petName) => {
+export const myAdoptionReq = async (petName, token) => {
   try {
-    const res = await fetch(`http://localhost:5000/all-pets/my-listing/adoptReq/${petName}`);
+    const res = await fetch(`http://localhost:5000/all-pets/my-listing/adoptReq/${petName}`, {
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
+      cache: "no-store",
+    });
     if (!res.ok) {
       throw new Error(`Failed to fetch adoption request: ${res.status}`);
     }
@@ -100,9 +90,3 @@ export const myAdoptionReq = async (petName) => {
     return [];
   }
 };
-
-// export const actionRequest = async (id) =>{
-//   const res = await fetch(`http://localhost:5000/adoptnow/actionReq/${id}`);
-//   const data = await res.json();
-//   return data;
-// }
