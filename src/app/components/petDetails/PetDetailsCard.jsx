@@ -20,7 +20,7 @@ const PetDetailsCard = ({ petData }) => {
           </span>
           <div className="flex gap-2">
             <button onClick={() => setIsFavorite(!isFavorite)} className="p-2.5 bg-white rounded-full shadow-md hover:scale-105 active:scale-95 transition backdrop-blur-md">
-              <Heart className={`w-4 h-4 transition-colors ${isFavorite ? "fill-rose-500 text-rose-500" : "text-gray-600"}`} />
+              <Heart className={`w-4 h-4 transition-colors cursor-pointer ${isFavorite ? "fill-rose-500 text-rose-500" : "text-gray-600"}`} />
             </button>
           </div>
         </div>

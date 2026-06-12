@@ -14,6 +14,7 @@ export default function LoginPage() {
   const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
 
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
@@ -23,7 +24,6 @@ export default function LoginPage() {
       email: inputData.email,
       password: inputData.password,
     });
-
 
     if (data) {
       toast.custom((t) => (
@@ -160,7 +160,7 @@ export default function LoginPage() {
                 placeholder="••••••••"
                 className="w-full bg-white/80 border border-transparent focus:border-orange-300 rounded-2xl py-3.5 pl-11 pr-11 text-sm text-gray-800 placeholder-gray-400 focus:outline-none shadow-sm transition-all duration-200"
               />
-              <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute right-4 text-gray-400 hover:text-gray-600 focus:outline-none">
+              <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute right-4 text-gray-400 hover:text-gray-600 focus:outline-none cursor-pointer">
                 {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
               </button>
             </div>
@@ -176,7 +176,7 @@ export default function LoginPage() {
           {/* Submit Button */}
           <button
             type="submit"
-            className="w-full bg-linear-to-r from-[#FF7A60] to-[#FF6B54] hover:opacity-95 text-white font-bold py-4 px-6 rounded-2xl shadow-lg shadow-orange-500/15 transition-all duration-200 flex items-center justify-center gap-2 active:scale-[0.99] mt-2 text-sm"
+            className="w-full bg-linear-to-r from-[#FF7A60] to-[#FF6B54] hover:opacity-95 text-white font-bold py-4 px-6 rounded-2xl shadow-lg shadow-orange-500/15 transition-all duration-200 flex items-center justify-center gap-2 active:scale-[0.99] mt-2 text-sm cursor-pointer"
           >
             Log in
             <PawPrint size={16} fill="currentColor" className="opacity-90" />

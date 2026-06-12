@@ -2,6 +2,7 @@
 
 import { authClient } from "@/lib/auth-client";
 import { DateField, Label } from "@heroui/react";
+import { PawPrint } from "lucide-react";
 import toast from "react-hot-toast";
 
 const PetDetailsForm = ({ userData, petName, ownerEmail, petId }) => {
@@ -105,10 +106,11 @@ const PetDetailsForm = ({ userData, petName, ownerEmail, petId }) => {
           <div className="relative">
             <select
               required
+              defaultValue
               name="reqHomeType"
               className="w-full bg-gray-50/60 border border-gray-100 rounded-xl px-4 py-3 text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-rose-500/20 focus:border-rose-500 focus:bg-white appearance-none transition duration-200 cursor-pointer"
             >
-              <option value={"hh"} disabled selected>
+              <option  disabled selected>
                 Select an option
               </option>
               <option value="house-yard">House with fenced yard</option>
@@ -136,9 +138,9 @@ const PetDetailsForm = ({ userData, petName, ownerEmail, petId }) => {
         {/* CTA Submit Button with Smooth Coral Gradient */}
         <button
           type="submit"
-          className="w-full py-3.5 px-4 bg-linear-to-r from-coral-500 to-rose-500 bg-[#FF6A55] text-white text-sm font-bold rounded-2xl shadow-lg shadow-rose-500/20 hover:opacity-95 hover:shadow-xl hover:shadow-rose-500/20 active:scale-[0.99] transition duration-150 flex items-center justify-center gap-2 mt-2"
+          className="w-full py-3.5 px-4 bg-linear-to-r from-coral-500 to-rose-500 bg-[#FF6A55] text-white text-sm font-bold rounded-2xl shadow-lg shadow-rose-500/20 hover:opacity-95 hover:shadow-xl hover:shadow-rose-500/20 active:scale-[0.99] transition duration-150 flex items-center justify-center gap-2 mt-2 cursor-pointer"
         >
-          🐾 Adopt
+        <PawPrint/> Adopt
         </button>
       </form>
     </div>

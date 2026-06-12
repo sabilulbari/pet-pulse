@@ -15,8 +15,8 @@ const FeatureCard = ({pet}) => {
             <div className="absolute top-4 right-4 bg-white/20 backdrop-blur-md p-2 rounded-full cursor-pointer hover:bg-rose-500 transition-colors group">
               <Heart className="text-white group-hover:fill-white" size={20} />
             </div>
-            <div className="absolute bottom-4 left-4 bg-green-500 text-white text-xs font-bold px-3 py-1 rounded-full flex items-center gap-1">
-              <span className="w-2 h-2 bg-white rounded-full animate-pulse" /> Available
+            <div className={` absolute bottom-4 left-4 ${pet.status == "Approved" ? "bg-amber-500" :" bg-green-500"} text-white text-xs font-bold px-3 py-1 rounded-full flex items-center gap-1`}>
+              <span className="w-2 h-2 bg-white rounded-full animate-pulse" /> {pet.status == "Approved" ? "Adopted" : "Available"}
             </div>
           </div>
 
@@ -33,7 +33,10 @@ const FeatureCard = ({pet}) => {
             <p className="text-gray-600 pt-2 line-clamp-1">{pet.petBio}</p>
           </div>
           <div className="flex items-center justify-center py-2">
-            <Link href={`/all-pets/${pet._id}`} className="flex items-center justify-center w-[60%] cursor-pointer bg-linear-to-r from-[#f7947d] to-[#ffaf9d] text-white px-4 py-2 rounded-full font-semibold shadow-lg shadow-orange-200 hover:scale-105 transition-transform">
+            <Link
+              href={`/all-pets/${pet._id}`}
+              className="flex items-center justify-center w-[60%] cursor-pointer bg-linear-to-r from-[#f7947d] to-[#ffaf9d] text-white px-4 py-2 rounded-full font-semibold shadow-lg shadow-orange-200 hover:scale-105 transition-transform"
+            >
               View Details
             </Link>
           </div>

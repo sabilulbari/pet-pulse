@@ -131,12 +131,12 @@ const Navbar = () => {
           ) : (
             <>
               <Link href="/login">
-                <button className="flex items-center bg-linear-to-r from-[#f7947d] to-[#ffaf9d] text-white px-5 py-2 rounded-full text-sm font-bold shadow-md shadow-orange-200/50 hover:scale-105 active:scale-[0.98] transition">
+                <button className="flex items-center bg-linear-to-r from-[#f7947d] to-[#ffaf9d] text-white px-5 py-2 rounded-full text-sm font-bold shadow-md shadow-orange-200/50 hover:scale-105 active:scale-[0.98] transition cursor-pointer">
                   Login
                 </button>
               </Link>
               <Link href="/signUp">
-                <button className="flex items-center bg-linear-to-r from-[#f7947d] to-[#ffaf9d] text-white px-5 py-2 rounded-full text-sm font-bold shadow-md shadow-orange-200/50 hover:scale-105 active:scale-[0.98] transition">
+                <button className="flex items-center bg-linear-to-r from-[#f7947d] to-[#ffaf9d] text-white px-5 py-2 rounded-full text-sm font-bold shadow-md shadow-orange-200/50 hover:scale-105 active:scale-[0.98] transition cursor-pointer">
                   Sign up
                 </button>
               </Link>

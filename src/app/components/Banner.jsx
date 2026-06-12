@@ -11,7 +11,7 @@ const Banner = () => {
 
       <div className="container mx-auto px-12 z-10 flex  flex-col-reverse md:flex-row items-center justify-between">
         {/* Left Content */}
-        <div className="max-w-xl space-y-8 text-center pt-4">
+        <div className="max-w-xl space-y-8 text-center md:text-left pt-4">
           <h1 className="text-7xl  text-[#1e293b] leading-[0.95]">
             A Friend <br />
             <span className="text-[#f7947d]">Is Waiting</span> <br />

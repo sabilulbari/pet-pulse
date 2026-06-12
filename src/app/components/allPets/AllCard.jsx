@@ -21,11 +21,16 @@ const AllCard = ({ pet }) => {
             loading="lazy"
           />
           {/* Custom Status Ribbon Badge */}
-          {/* <span className={`absolute top-3 left-3 text-[10px] font-extrabold text-white px-2.5 py-1 rounded-md shadow-sm ${pet.badgeColor}`}>{pet.badge}</span> */}
+          <span className={`absolute top-3 left-3 text-[10px] font-extrabold text-white px-2.5 py-1 rounded-md shadow-sm ${pet.badgeColor}`}>{pet.badge}</span>
           {/* Favorite Heart Button */}
           <button className="absolute top-3 right-3 p-2 bg-black/15 backdrop-blur-md rounded-full text-white hover:bg-white hover:text-red-500 transition-all duration-200">
             <Heart className="w-3.5 h-3.5 fill-current" />
           </button>
+          <div
+            className={` absolute top-4 left-4 ${pet.status == "Approved" ? "bg-amber-500" : " bg-green-500"} text-white text-xs font-bold px-3 py-1 rounded-full flex items-center gap-1`}
+          >
+            <span className="w-2 h-2 bg-white rounded-full animate-pulse" /> {pet.status == "Approved" ? "Adopted" : "Available"}
+          </div>
         </div>
 
         {/* Card Info Details */}

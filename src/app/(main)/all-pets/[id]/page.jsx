@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 import PetDetailsCard from "@/app/components/petDetails/PetDetailsCard";
 import PetDetailsForm from "@/app/components/petDetails/PetDetailsForm";
 import { auth } from "@/lib/auth";
@@ -17,8 +18,6 @@ export default async function PetDetails({ params }) {
   });
 
   const petData = await petDataById(id, token);
-
-
 
   const { adoptionFee, age, breed, colorMarkings, gender, healthStatus, location, petBio, petName, species, _id, vaccineStatus, ownerEmail, imageUrl, status } = petData;
   return (

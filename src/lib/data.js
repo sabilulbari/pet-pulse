@@ -7,7 +7,7 @@ export const allpetData = async () => {
       throw new Error(`Failed to fetch pets: ${res.status}`);
     }
     const data = await res.json();
-    
+
     return Array.isArray(data) ? data : [];
   } catch (error) {
     console.error("Error fetching pets:", error);
@@ -17,10 +17,11 @@ export const allpetData = async () => {
 
 export const petDataById = async (id, token) => {
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/all-pets/${id}`, {
+    const res = await fetch(`https://pet-pulse-server.vercel.app/all-pets/${id}`, {
       headers: {
         authorization: `Bearer ${token}`,
       },
+      cache: "no-store",
     });
 
     if (!res.ok) {
