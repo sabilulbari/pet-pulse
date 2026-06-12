@@ -11,7 +11,7 @@ const PetDetailsForm = ({ userData, petName, ownerEmail, petId }) => {
     const formData = new FormData(e.target);
     const data = Object.fromEntries(formData.entries());
 
-    const isSameEmail = ownerEmail === data.reqUserEmail;
+    
 
     const {data: tokenData} = await authClient.token()
     if (!isSameEmail) {
@@ -43,9 +43,7 @@ const PetDetailsForm = ({ userData, petName, ownerEmail, petId }) => {
       } else {
         toast.error(`Failed to submit application. Please try again.`);
       }
-    } else {
-      toast.error("You can not adopt your pet");
-    }
+    } 
   };
   return (
     <div>
