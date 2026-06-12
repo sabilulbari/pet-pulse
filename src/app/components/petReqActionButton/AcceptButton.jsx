@@ -18,7 +18,7 @@ const AcceptButton = ({ request }) => {
       const { data: tokenData } = await authClient.token();
 
     try {
-      const res = await fetch(`http://localhost:5000/adoptnow/approveReq/${approveId}`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/adoptnow/approveReq/${approveId}`, {
         method: "PATCH",
         headers: {
           "content-type": "application/json",

@@ -14,11 +14,11 @@ const PetDetailsForm = ({ userData, petName, ownerEmail, petId }) => {
 
     const {data: tokenData} = await authClient.token()
     if (!isSameEmail) {
-      const res = await fetch("http://localhost:5000/adoptnow", {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/adoptnow`, {
         method: "POST",
         headers: {
           "Content-type": "application/json",
-          authorization: `Bearer ${tokenData?.token}`
+          authorization: `Bearer ${tokenData?.token}`,
         },
         body: JSON.stringify({
           petName,

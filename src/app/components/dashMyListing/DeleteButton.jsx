@@ -12,7 +12,7 @@ export function DeleteButton({ list }) {
 
   const handleDelete = async () => {
     const { data: tokenData } = await authClient.token();
-    const res = await fetch(`http://localhost:5000/addPet/${_id}`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/addPet/${_id}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",

@@ -53,7 +53,7 @@ export default function AddPetForm() {
     const fromData = new FormData(e.target);
     const addPets = Object.fromEntries(fromData.entries());
 
-    const res = await fetch("http://localhost:5000/addPet", {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/addPet`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

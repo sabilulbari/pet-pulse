@@ -65,7 +65,7 @@ export function EditButton({ list }) {
     const fromData = new FormData(e.target);
     const addPets = Object.fromEntries(fromData.entries());
 
-    const res = await fetch(`http://localhost:5000/addPet/${_id}`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/addPet/${_id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",

@@ -2,11 +2,12 @@ import { authClient } from "./auth-client";
 
 export const allpetData = async () => {
   try {
-    const res = await fetch("http://localhost:5000/all-pets");
+    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/all-pets`, { cache: "no-store" });
     if (!res.ok) {
       throw new Error(`Failed to fetch pets: ${res.status}`);
     }
     const data = await res.json();
+    console.log(data, "all pers data");
     return Array.isArray(data) ? data : [];
   } catch (error) {
     console.error("Error fetching pets:", error);
@@ -16,7 +17,7 @@ export const allpetData = async () => {
 
 export const petDataById = async (id, token) => {
   try {
-    const res = await fetch(`http://localhost:5000/all-pets/${id}`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/all-pets/${id}`, {
       headers: {
         authorization: `Bearer ${token}`,
       },
@@ -36,7 +37,7 @@ export const petDataById = async (id, token) => {
 
 export const myRequest = async (reqUserEmail, token) => {
   try {
-    const res = await fetch(`http://localhost:5000/adoptnow/my-request/${reqUserEmail}`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/adoptnow/my-request/${reqUserEmail}`, {
       headers: {
         authorization: `Bearer ${token}`,
       },
@@ -55,7 +56,7 @@ export const myRequest = async (reqUserEmail, token) => {
 
 export const myListingData = async (ownerEmail, token) => {
   try {
-    const res = await fetch(`http://localhost:5000/all-pets/my-listing/${ownerEmail}`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/all-pets/my-listing/${ownerEmail}`, {
       headers: {
         authorization: `Bearer ${token}`,
       },
@@ -75,7 +76,7 @@ export const myListingData = async (ownerEmail, token) => {
 export const myAdoptionReq = async (petName, tokenData) => {
   console.log(petName, tokenData.token);
   try {
-    const res = await fetch(`http://localhost:5000/all-pets/my-listing/adoptReq/${petName}`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/all-pets/my-listing/adoptReq/${petName}`, {
       headers: {
         authorization: `Bearer ${tokenData.token}`,
       },

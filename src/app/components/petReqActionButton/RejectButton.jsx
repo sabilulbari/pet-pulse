@@ -17,7 +17,7 @@ const RejectButton = ({ request }) => {
   const handleApprove = async (rejectId) => {
           const { data: tokenData } = await authClient.token();
     try {
-      const res = await fetch(`http://localhost:5000/adoptnow/rejectReq/${rejectId}`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/adoptnow/rejectReq/${rejectId}`, {
         method: "PATCH",
         headers: {
           "content-type": "application/json",
