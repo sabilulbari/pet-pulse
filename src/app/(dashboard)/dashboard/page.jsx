@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 import { PawPrint } from "lucide-react";
 import React from "react";
 

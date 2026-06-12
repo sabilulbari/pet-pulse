@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 import Banner from "../components/Banner";
 import Feature from "../components/Feature";
 import NumberDetails from "../components/NumberDetails";
