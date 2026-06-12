@@ -7,7 +7,7 @@ export const allpetData = async () => {
       throw new Error(`Failed to fetch pets: ${res.status}`);
     }
     const data = await res.json();
-    console.log(data, "all pers data");
+    
     return Array.isArray(data) ? data : [];
   } catch (error) {
     console.error("Error fetching pets:", error);
@@ -21,7 +21,6 @@ export const petDataById = async (id, token) => {
       headers: {
         authorization: `Bearer ${token}`,
       },
-      cache: "no-store",
     });
 
     if (!res.ok) {
