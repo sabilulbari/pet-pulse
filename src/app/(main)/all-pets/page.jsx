@@ -1,5 +1,5 @@
 "use client";
-
+export const dynamic = "force-dynamic";
 import { Search } from "lucide-react";
 import { useState, useEffect } from "react";
 import AllCard from "../../components/allPets/AllCard";
