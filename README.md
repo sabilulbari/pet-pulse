@@ -1,36 +1,181 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 🐾 Pet Pals - Pet Adoption Platform
 
-## Getting Started
+Pet Pals is a full-stack MERN Stack web application that connects loving families with pets looking for a new home. Users can browse available pets, view detailed information, submit adoption requests, and manage their own requests. Pet owners or shelters can create and manage pet listings and handle adoption requests through a dedicated dashboard.
 
-First, run the development server:
+## 🌐 Live Website
+
+🔗 https://pet-pals.vercel.app/
+
+## 🌐 Live Server Side
+🔗 https://pet-pulse-server.vercel.app/
+
+---
+
+## 🎯 Project Purpose
+
+The main goal of this project is to provide a modern and user-friendly pet adoption platform where:
+
+* People can find their perfect pet companion.
+* Pet owners and shelters can manage pet listings.
+* Adoption requests are handled securely.
+* Only authenticated users can adopt pets.
+* The adoption process is organized and transparent.
+
+---
+
+## ✨ Key Features
+
+* 🐶 Browse all available pets with search, filtering, and sorting.
+* 🔐 Secure authentication with Email/Password and Google Sign-In.
+* ❤️ Authenticated users can submit and manage adoption requests.
+* 📋 Pet owners can add, update, and delete their own pet listings.
+* ✅ Approve or reject adoption requests from the dashboard.
+* 🚫 Pet owners cannot adopt their own pets.
+* 🔒 JWT authentication with HTTPOnly cookies for secure private routes.
+* 📱 Fully responsive design for mobile, tablet, and desktop devices.
+* 🔔 Beautiful toast notifications instead of default browser alerts.
+* ⚡ Custom 404 page and loading spinner for better user experience.
+
+---
+
+## 🛠️ Technologies Used
+
+### Frontend
+
+* Next.js
+* React.js
+* Tailwind CSS
+* HeroUI
+* Framer Motion
+* React Icons
+* Lucide React
+
+### Backend
+
+* Node.js
+* Express.js
+* MongoDB
+* Better Auth
+* JWT Authentication
+* HTTPOnly Cookies
+
+### Deployment
+
+* Vercel (Client)
+* Render / Vercel Server
+* MongoDB Atlas
+
+---
+
+## 📦 NPM Packages Used
+
+### Client Side
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+next
+react
+react-dom
+tailwindcss
+@heroui/react
+framer-motion
+react-icons
+lucide-react
+react-hot-toast
+date-fns
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🚀 Main Functionalities
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+### Public Features
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+* Home Page
+* Featured Pets
+* All Pets Listing
+* Search Pets
+* Filter by Species
+* View Pet Details
 
-## Learn More
+### Authentication
 
-To learn more about Next.js, take a look at the following resources:
+* User Registration
+* User Login
+* Google Login
+* Protected Routes
+* JWT with HTTPOnly Cookies
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### User Dashboard
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+* My Requests
+* Add New Pet
+* My Listings
+* Cancel Adoption Requests
 
-## Deploy on Vercel
+### Pet Owner Dashboard
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+* Manage Pet Listings
+* Update Pet Information
+* Delete Pet
+* View Adoption Requests
+* Approve or Reject Requests
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+
+## 🔒 Security Features
+
+* Protected API routes
+* JWT Authentication
+* HTTPOnly Cookies
+* Environment Variables for sensitive data
+* Secure MongoDB credentials
+* Private Route Protection
+
+---
+
+## 📂 Project Structure
+
+```text
+Pet Pals
+│
+├── 
+│   ├── app/
+│   ├── components/
+│   └── utils/
+│
+└── README.md
+```
+
+---
+
+## ⚙️ Environment Variables
+
+Create a `.env.local` file for the client and a `.env` file for the server.
+
+### Client
+
+```env
+NEXT_PUBLIC_API_URL=your_api_url
+
+---
+
+## 🎨 Project Highlights
+
+* Clean and recruiter-friendly UI
+* Responsive design
+* Fast and optimized performance
+* Modern dashboard experience
+* Real-world CRUD operations
+* Advanced pet search and filtering
+
+---
+
+## 👨‍💻 Developer
+
+**Md Sabilul Bari**
+
+GitHub: https://github.com/sabilulbari
+
+---
+
+## 📜 License
+
+This project is developed for learning purposes and portfolio showcase.
