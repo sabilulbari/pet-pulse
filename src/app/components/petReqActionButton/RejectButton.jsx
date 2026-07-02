@@ -52,7 +52,7 @@ const RejectButton = ({ request }) => {
                             `}
         >
           <XCircle className="w-3.5 h-3.5" />
-          <span>Reject</span>
+          <span>Cancle</span>
         </Button>
         <AlertDialog.Backdrop>
           <AlertDialog.Container>

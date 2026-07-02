@@ -11,10 +11,17 @@ const PetDetailsForm = ({ userData, petName, ownerEmail, petId }) => {
     const formData = new FormData(e.target);
     const data = Object.fromEntries(formData.entries());
 
-    
+    console.log(data.reqUserEmail, ownerEmail, "User same email");
 
-    const {data: tokenData} = await authClient.token()
-    if (!isSameEmail) {
+    const isSameEmail = ownerEmail === data.reqUserEmail;
+
+    if (isSameEmail) {
+      return toast.error("You cannot adopt your own pet!");
+    }
+
+    try {
+      const { data: tokenData } = await authClient.token();
+
       const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/adoptnow`, {
         method: "POST",
         headers: {
@@ -25,14 +32,13 @@ const PetDetailsForm = ({ userData, petName, ownerEmail, petId }) => {
           petName,
           ownerEmail,
           petId,
-          userImage: userData.image,
+          userImage: userData?.image, // safe navigation যোগ করা হয়েছে
           status: "Pending",
           pickupDate: data.date,
           applicationDate: new Date().toISOString().split("T")[0],
           reqUserName: data.reqUserName,
           reqUserEmail: data.reqUserEmail,
-          reqHomeAddress: data.reqHomeAddress,
-          reqHomeType: data.reqHomeType,
+          reqMassage: data.reqMassage,
         }),
       });
 
@@ -43,8 +49,12 @@ const PetDetailsForm = ({ userData, petName, ownerEmail, petId }) => {
       } else {
         toast.error(`Failed to submit application. Please try again.`);
       }
-    } 
+    } catch (error) {
+      console.error(error);
+      toast.error("Something went wrong. Please try again.");
+    }
   };
+
   return (
     <div>
       <form onSubmit={handleSubmit} className="space-y-4">
@@ -86,59 +96,34 @@ const PetDetailsForm = ({ userData, petName, ownerEmail, petId }) => {
           />
         </div>
 
-        {/* Home Address */}
-        <div className="space-y-1.5">
-          <label className="text-xs font-bold text-gray-700 block">Home Address</label>
-          <input
-            required
-            type="text"
-            name="reqHomeAddress"
-            placeholder="Enter your address"
-            className="w-full bg-gray-50/60 border border-gray-100 rounded-xl px-4 py-3 text-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-rose-500/20 focus:border-rose-500 focus:bg-white transition duration-200"
-          />
-        </div>
-
-        {/* Tell us about your home */}
-        <div className="space-y-1.5">
-          <label className="text-xs font-bold text-gray-700 block">Tell us about your home</label>
-          <div className="relative">
-            <select
-              required
-              defaultValue
-              name="reqHomeType"
-              className="w-full bg-gray-50/60 border border-gray-100 rounded-xl px-4 py-3 text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-rose-500/20 focus:border-rose-500 focus:bg-white appearance-none transition duration-200 cursor-pointer"
-            >
-              <option  disabled selected>
-                Select an option
-              </option>
-              <option value="house-yard">House with fenced yard</option>
-              <option value="house-norad">House with no yard</option>
-              <option value="apartment">Apartment / Condo</option>
-            </select>
-            <div className="absolute inset-y-0 right-4 flex items-center pointer-events-none text-gray-400">
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
-              </svg>
-            </div>
-          </div>
-        </div>
-
         {/* Pick up date */}
         <div className="space-y-1.5">
-          <DateField isRequired className="w-[256px]" name="date">
-            <Label>Pck up date</Label>
+          <DateField isRequired className="w-full" name="date">
+            <Label>Pick up date</Label>
             <DateField.Group>
               <DateField.Input>{(segment) => <DateField.Segment segment={segment} />}</DateField.Input>
             </DateField.Group>
           </DateField>
         </div>
 
-        {/* CTA Submit Button with Smooth Coral Gradient */}
+        {/* Message */}
+        <div className="space-y-1.5">
+          <label className="text-xs font-bold text-gray-700 block">Message</label>
+          <input
+            required
+            type="text"
+            name="reqMassage"
+            placeholder="Enter your message"
+            className="w-full bg-gray-50/60 border border-gray-100 rounded-xl px-4 py-3 text-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-rose-500/20 focus:border-rose-500 focus:bg-white transition duration-200"
+          />
+        </div>
+
+        {/* CTA Submit Button */}
         <button
           type="submit"
-          className="w-full py-3.5 px-4 bg-linear-to-r from-coral-500 to-rose-500 bg-[#FF6A55] text-white text-sm font-bold rounded-2xl shadow-lg shadow-rose-500/20 hover:opacity-95 hover:shadow-xl hover:shadow-rose-500/20 active:scale-[0.99] transition duration-150 flex items-center justify-center gap-2 mt-2 cursor-pointer"
+          className="w-full py-3.5 px-4 bg-[#FF6A55] text-white text-sm font-bold rounded-2xl shadow-lg shadow-rose-500/20 hover:opacity-95 hover:shadow-xl hover:shadow-rose-500/20 active:scale-[0.99] transition duration-150 flex items-center justify-center gap-2 mt-2 cursor-pointer"
         >
-        <PawPrint/> Adopt
+          <PawPrint /> Adopt
         </button>
       </form>
     </div>
