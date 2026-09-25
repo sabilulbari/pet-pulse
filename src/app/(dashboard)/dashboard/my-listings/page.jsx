@@ -60,7 +60,7 @@ const MyListing = async () => {
             </div>
             <div>
               <h2 className="text-lg font-bold text-slate-800 tracking-tight">No Pet Found</h2>
-              <p className="text-xs sm:text-sm text-slate-500 font-medium mt-0.5">You haven't added any pets yet. Please add a pet!</p>
+              <p className="text-xs sm:text-sm text-slate-500 font-medium mt-0.5">You haven&apos;t added any pets yet. Please add a pet!</p>
             </div>
           </div>
         </div>
