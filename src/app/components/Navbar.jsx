@@ -84,7 +84,7 @@ const Navbar = () => {
         duration: 0.65,
         ease: [0.22, 1, 0.36, 1],
       }}
-      className="sticky top-0 z-999 w-full px-4 "
+      className="sticky top-0 z-999 -mb-20 w-full px-4 "
     >
       <div className="max-w-7xl mx-auto">
         <div

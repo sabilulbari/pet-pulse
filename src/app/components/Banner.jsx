@@ -68,9 +68,9 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[#FFF9F5] text-[#1E293B] font-sans antialiased selection:bg-[#FF7A65]/20 selection:text-[#F06A53] relative overflow-hidden flex flex-col justify-between">
+    <div className="min-h-screen bg-[#FFF9F5] text-[#1E293B] font-sans antialiased selection:bg-[#FF7A65]/20 selection:text-[#F06A53] relative overflow-hidden flex flex-col justify-between pt-18">
       {/* HERO MAIN BODY */}
-      <main className="w-full max-w-7xl mx-auto px-6 sm:px-10 py-6 md:py-12 flex-1 flex items-center">
+      <main className="w-full max-w-7xl mx-auto px-6 sm:px-10 py-6 md:py-14 flex-1 flex items-center">
         <motion.div variants={containerVariants} initial="hidden" animate="visible" className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center w-full">
           {/* LEFT CONTENT COLUMN */}
           <div className="lg:col-span-6 space-y-6 lg:space-y-8 z-10">
