@@ -1,63 +1,4 @@
-// import Image from "next/image";
-// import Link from "next/link";
-// import React from "react";
-// import { MdOutlinePets } from "react-icons/md";
 
-// const Banner = () => {
-//   return (
-//     <section className="relative w-full flex items-center overflow-hidden bg-[#FDF9F7] ">
-//       {/* Background Subtle Radial Gradient */}
-//       <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,var(--tw-gradient-stops))] from-orange-100 via-white to-white opacity-60" />
-
-//       <div className="container mx-auto px-12 z-10 flex  flex-col-reverse md:flex-row items-center justify-between">
-//         {/* Left Content */}
-//         <div className="max-w-xl space-y-8 text-center md:text-left pt-4">
-//           <h1 className="text-7xl  text-[#1e293b] leading-[0.95]">
-//             A Friend <br />
-//             <span className="text-[#f7947d]">Is Waiting</span> <br />
-//             for You
-//           </h1>
-
-//           <p className="text-lg text-gray-600 max-w-md">Thousands of adorable pets are looking for a loving home. Adopt today and find your loyal companion.</p>
-
-//           <Link className="flex justify-center items-center" href={"/all-pets"}>
-//             <button className="flex items-center gap-3 cursor-pointer bg-linear-to-r from-[#f7947d] to-[#ffaf9d] text-white px-8 py-4 rounded-full font-semibold shadow-lg shadow-orange-200 hover:scale-105 transition-transform">
-//               <span className="bg-white/20 p-1 rounded-full">
-//                 <MdOutlinePets />
-//               </span>
-//               Adopt Now &gt;
-//             </button>
-//           </Link>
-
-//           {/* Feature Badges */}
-//           <div className="flex gap-8 pt-4 text-gray-700">
-//             {["Verified Shelters", "Healthy Pets", "Lifetime Support"].map((item, i) => (
-//               <div key={i} className="flex items-center gap-2 text-sm font-medium">
-//                 <div className="w-5 h-5 rounded-full border border-gray-300 flex items-center justify-center">✓</div>
-//                 {item}
-//               </div>
-//             ))}
-//           </div>
-//         </div>
-
-//         {/* Right Content: The Image */}
-//         <div className="relative w-125 h-125">
-//           <Image
-//             src="https://images.unsplash.com/photo-1529778873920-4da4926a72c2?fm=jpg&q=60&w=3000&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8bGl0dGxlJTIwY2F0fGVufDB8fDB8fHww"
-//             width={500}
-//             height={500}
-//             alt="Puppy and Kitten"
-//             className="w-full h-full object-cover rounded-3xl"
-//           />
-//         </div>
-//       </div>
-
-//       {/* Floating Info Cards */}
-//     </section>
-//   );
-// };
-
-// export default Banner;
 "use client"
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
@@ -74,8 +15,10 @@ import {
   ArrowRight,
   Menu,
   X,
-  ChevronRight
+  ChevronRight,
+  PawPrint
 } from 'lucide-react';
+import Image from 'next/image';
 
 export default function App() {
   const [isAdopted, setIsAdopted] = useState(false);
@@ -136,8 +79,6 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-[#FFF9F5] text-[#1E293B] font-sans antialiased selection:bg-[#FF7A65]/20 selection:text-[#F06A53] relative overflow-hidden flex flex-col justify-between">
-
-
       {/* HERO MAIN BODY */}
       <main className="w-full max-w-7xl mx-auto px-6 sm:px-10 py-6 md:py-12 flex-1 flex items-center">
         <motion.div variants={containerVariants} initial="hidden" animate="visible" className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center w-full">
@@ -156,14 +97,14 @@ export default function App() {
             </motion.div>
 
             {/* Main Headline with Highlight & SVG Doodle */}
-            <motion.div variants={fadeInUp} className="space-y-1 relative">
+            <motion.div variants={fadeInUp} className="space-y-1 relative ">
               <h1 className="text-4xl sm:text-5xl xl:text-6xl font-black text-[#1E293B] leading-[1.12] tracking-tight">
                 A Loving Home <br />
-                <span className="relative inline-block text-[#FF7A65]">
+                <span className="inline-block text-[#FF7A65]">
                   Is Waiting
                   {/* Floating Hand-Drawn Doodle Heart Accent */}
                   <svg
-                    className="absolute -right-12 -top-2 w-10 h-10 text-[#FF7A65] animate-pulse"
+                    className="absolute right-5  top-6 w-10 h-10 text-[#FF7A65] animate-pulse"
                     viewBox="0 0 50 50"
                     fill="none"
                     stroke="currentColor"
@@ -188,9 +129,7 @@ export default function App() {
             <motion.div variants={fadeInUp} className="flex flex-wrap items-center gap-4 pt-2">
               <button className="group relative inline-flex items-center gap-3 bg-[#FF7A65] hover:bg-[#F06A53] text-white px-8 py-4 rounded-full font-bold text-base shadow-xl shadow-[#FF7A65]/30 hover:shadow-2xl hover:shadow-[#FF7A65]/40 transition-all duration-300 transform hover:-translate-y-0.5 active:translate-y-0">
                 {/* Paw SVG inside button */}
-                <svg className="w-5 h-5 fill-current transition-transform duration-300 group-hover:rotate-12" viewBox="0 0 24 24">
-                  <path d="M12 10c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-5 1c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm10 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-7.5 5c-1.93 0-3.5 1.57-3.5 3.5 0 2.48 2.02 4.5 4.5 4.5 1.54 0 2.91-.78 3.73-1.97C14.56 23.22 15.93 24 17.47 24c2.48 0 4.5-2.02 4.5-4.5 0-1.93-1.57-3.5-3.5-3.5-.66 0-1.28.18-1.81.5-.72-.92-1.84-1.5-3.09-1.5s-2.37.58-3.09 1.5c-.53-.32-1.15-.5-1.81-.5z" />
-                </svg>
+                <PawPrint />
                 <span>Find a Friend</span>
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </button>
@@ -249,10 +188,12 @@ export default function App() {
                   borderRadius: "52% 48% 63% 37% / 43% 54% 46% 57%",
                 }}
               >
-                <img
+                <Image
                   src="https://images.unsplash.com/photo-1574158622682-e40e69881006?auto=format&fit=crop&q=80&w=900"
                   alt="Adorable Tabby Kitten"
                   className="w-full h-full object-cover transform hover:scale-105 transition-transform duration-700 ease-out"
+                  height={300}
+                  width={300}
                 />
               </motion.div>
 
@@ -264,9 +205,11 @@ export default function App() {
               >
                 <div className="flex items-center gap-3 mb-3">
                   <div className="relative">
-                    <img
+                    <Image
                       src="https://images.unsplash.com/photo-1574158622682-e40e69881006?auto=format&fit=crop&q=80&w=150"
                       alt="Milo Avatar"
+                      height={300}
+                      width={300}
                       className="w-12 h-12 rounded-2xl object-cover ring-2 ring-[#FF7A65]/30"
                     />
                     <span className="absolute -top-1 -right-1 w-3.5 h-3.5 bg-emerald-500 rounded-full border-2 border-white" />
@@ -304,64 +247,6 @@ export default function App() {
           </div>
         </motion.div>
       </main>
-
-      {/* BOTTOM STATS BANNER */}
-      <motion.footer
-        initial={{ opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.5, duration: 0.8 }}
-        className="w-full max-w-7xl mx-auto px-6 sm:px-10 pb-8 pt-4"
-      >
-        <div className="bg-white/80 backdrop-blur-md rounded-3xl p-6 sm:p-8 border border-orange-100/80 shadow-xl shadow-orange-950/[0.03]">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-4 divide-x-0 md:divide-x divide-slate-100">
-            {/* Stat Item 1 */}
-            <div className="flex items-center gap-4 md:justify-center group">
-              <div className="w-12 h-12 rounded-2xl bg-orange-100/60 text-[#FF7A65] flex items-center justify-center transition-transform group-hover:scale-110 duration-300">
-                <svg className="w-6 h-6 fill-current" viewBox="0 0 24 24">
-                  <path d="M12 10c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-5 1c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm10 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-7.5 5c-1.93 0-3.5 1.57-3.5 3.5 0 2.48 2.02 4.5 4.5 4.5 1.54 0 2.91-.78 3.73-1.97C14.56 23.22 15.93 24 17.47 24c2.48 0 4.5-2.02 4.5-4.5 0-1.93-1.57-3.5-3.5-3.5-.66 0-1.28.18-1.81.5-.72-.92-1.84-1.5-3.09-1.5s-2.37.58-3.09 1.5c-.53-.32-1.15-.5-1.81-.5z" />
-                </svg>
-              </div>
-              <div>
-                <p className="text-2xl sm:text-3xl font-black text-slate-800 tracking-tight">2,500+</p>
-                <p className="text-xs sm:text-sm text-slate-500 font-medium">Pets Adopted</p>
-              </div>
-            </div>
-
-            {/* Stat Item 2 */}
-            <div className="flex items-center gap-4 md:justify-center md:pl-4 group">
-              <div className="w-12 h-12 rounded-2xl bg-orange-100/60 text-[#FF7A65] flex items-center justify-center transition-transform group-hover:scale-110 duration-300">
-                <Home className="w-6 h-6" />
-              </div>
-              <div>
-                <p className="text-2xl sm:text-3xl font-black text-slate-800 tracking-tight">1,800+</p>
-                <p className="text-xs sm:text-sm text-slate-500 font-medium">Happy Families</p>
-              </div>
-            </div>
-
-            {/* Stat Item 3 */}
-            <div className="flex items-center gap-4 md:justify-center md:pl-4 group">
-              <div className="w-12 h-12 rounded-2xl bg-orange-100/60 text-[#FF7A65] flex items-center justify-center transition-transform group-hover:scale-110 duration-300">
-                <Smile className="w-6 h-6" />
-              </div>
-              <div>
-                <p className="text-2xl sm:text-3xl font-black text-slate-800 tracking-tight">98%</p>
-                <p className="text-xs sm:text-sm text-slate-500 font-medium">Satisfaction Rate</p>
-              </div>
-            </div>
-
-            {/* Stat Item 4 */}
-            <div className="flex items-center gap-4 md:justify-center md:pl-4 group">
-              <div className="w-12 h-12 rounded-2xl bg-orange-100/60 text-[#FF7A65] flex items-center justify-center transition-transform group-hover:scale-110 duration-300">
-                <Clock className="w-6 h-6" />
-              </div>
-              <div>
-                <p className="text-2xl sm:text-3xl font-black text-slate-800 tracking-tight">24/7</p>
-                <p className="text-xs sm:text-sm text-slate-500 font-medium">Support Available</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </motion.footer>
     </div>
   );
 }
