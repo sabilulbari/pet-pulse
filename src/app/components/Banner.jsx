@@ -3,19 +3,9 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { 
-  Heart, 
-  Search, 
-  User, 
-  Check, 
-  Home, 
+  Heart,  
   Sparkles, 
-  Clock, 
-  Smile, 
-  ShieldCheck, 
   ArrowRight,
-  Menu,
-  X,
-  ChevronRight,
   PawPrint
 } from 'lucide-react';
 import Image from 'next/image';
