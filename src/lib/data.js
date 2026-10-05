@@ -17,7 +17,7 @@ export const allpetData = async () => {
 
 export const petDataById = async (id, token) => {
   try {
-    const res = await fetch(`https://pet-pulse-server.vercel.app/all-pets/${id}`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/all-pets/${id}`, {
       headers: {
         authorization: `Bearer ${token}`,
       },
