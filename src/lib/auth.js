@@ -17,6 +17,12 @@ export const auth = betterAuth({
   emailAndPassword: {
     enabled: true,
   },
+  account: {
+    accountLinking: {
+      enabled: true,
+      trustedProviders: ["google"],
+    },
+  },
   socialProviders: {
     google: {
       clientId: process.env.GOOGLE_CLIENT_ID,
@@ -27,10 +33,8 @@ export const auth = betterAuth({
     cookieCache: {
       enabled: true,
       strategy: "jwt",
-      maxAge: 7 * 24 * 60 * 60
-    }
+      maxAge: 7 * 24 * 60 * 60,
+    },
   },
-  plugins: [
-    jwt()
-  ]
+  plugins: [jwt()],
 });
