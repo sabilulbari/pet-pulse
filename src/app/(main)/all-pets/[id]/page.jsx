@@ -20,11 +20,10 @@ export default async function PetDetails({ params }) {
   
   const { adoptionFee, age, breed, colorMarkings, gender, healthStatus, location, petBio, petName, species, _id, vaccineStatus, ownerEmail, imageUrl, status } = petData;
 
-  // console.log(adoptionFee, "Adoptio fee");
   console.log(adoptionFee, "Adoptio data");
   const isSameEmail = ownerEmail === userData?.email;
   return (
-    <div className="min-h-screen bg-[#F5F6F8] px-4 py-8 md:p-8 flex justify-center items-center font-sans selection:bg-rose-100 selection:text-rose-700">
+    <div className="min-h-screen bg-[#F5F6F8] mt-20 px-4 py-8 md:p-8 flex justify-center items-center font-sans selection:bg-rose-100 selection:text-rose-700">
       <div className="max-w-6xl w-full grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
         {/* ================= LEFT SIDE: PET PROFILE ================= */}
         <div className="lg:col-span-7 bg-white rounded-3xl shadow-sm border border-gray-100 overflow-hidden p-5 md:p-6 space-y-6">

@@ -7,6 +7,8 @@ import BadgeSection from "../../components/allPets/BadgeSection";
 import { allpetData } from "../../../lib/data";
 import PetLoader from "@/app/loading";
 
+
+
 const PetMarketplace = () => {
 
   
@@ -78,12 +80,12 @@ const PetMarketplace = () => {
   }
 
   return (
-    <div className="min-h-screen bg-[#F9F9FC] text-[#2D3142] font-sans relative overflow-hidden">
+    <div className="min-h-screen bg-[#F9F9FC] text-[#2D3142]  font-sans relative overflow-hidden">
       {/* Soft Pastel Background Glows */}
       <div className="absolute top-[-10%] left-[-10%] w-[40vw] h-[40vw] rounded-full bg-purple-200/40 blur-[120px] pointer-events-none" />
       <div className="absolute top-[5%] right-[-5%] w-[35vw] h-[35vw] rounded-full bg-indigo-100/50 blur-[100px] pointer-events-none" />
 
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-24 relative z-10">
+      <main className="max-w-7xl mx-auto mt-20 px-4 sm:px-6 lg:px-8 pt-12 pb-24 relative z-10">
         {/* 2. Hero Section Title */}
         <div className="text-center mb-8">
           <h1 className="text-3xl md:text-4xl font-extrabold text-[#1E2229] tracking-tight mb-2">Find Your Perfect Companion</h1>

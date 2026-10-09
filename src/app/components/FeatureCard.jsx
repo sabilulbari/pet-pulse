@@ -35,6 +35,7 @@ const FeatureCard = ({pet}) => {
           <div className="flex items-center justify-center py-2">
             <Link
               href={`/all-pets/${pet._id}`}
+              prefetch={true}
               className="flex items-center justify-center w-[60%] cursor-pointer bg-linear-to-r from-[#f7947d] to-[#ffaf9d] text-white px-4 py-2 rounded-full font-semibold shadow-lg shadow-orange-200 hover:scale-105 transition-transform"
             >
               View Details
