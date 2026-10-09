@@ -8,7 +8,7 @@ const Feature = async () => {
   const petData = await allpetData();
 
   return (
-    <section className="bg-[#FAF9F7] py-20 px-6 lg:px-20">
+    <section className="bg-[#FAF9F7] py-10 px-6 lg:px-20">
       {/* Header */}
       <div className="flex justify-between mb-12">
         <div className="space-y-2">

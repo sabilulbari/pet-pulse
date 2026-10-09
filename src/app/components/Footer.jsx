@@ -17,9 +17,9 @@ const Footer = () => {
             <h3 className=" text-2xl text-[#febe74] flex items-center justify-center lg:justify-start gap-2">Get in Touch</h3>
             <div className="space-y-4">
               {[
-                { icon: Phone, text: "(555) 123-4567" },
-                { icon: Mail, text: "hello@pawsandlove.com" },
-                { icon: MapPin, text: "123 Pet Lane, Happy Tails City" },
+                { icon: Phone, text: "(+880) 1778421726" },
+                { icon: Mail, text: "mdsabilulbari@gmail.com" },
+                { icon: MapPin, text: "Motijhil, Happy Tails City" },
                 { icon: Clock, text: "Mon - Fri: 9am - 6pm" },
               ].map((item, i) => (
                 <div key={i} className="flex items-center justify-center lg:justify-start gap-3 text-gray-600">
@@ -75,7 +75,7 @@ const Footer = () => {
               </a>
             ))}
           </div>
-          <p className="text-xs text-gray-400">© 2024 Paws & Love. All rights reserved. 🐾</p>
+          <p className="text-xs text-gray-400">© 2024 Paws & Love. All rights reserved.</p>
         </div>
       </div>
     </footer>

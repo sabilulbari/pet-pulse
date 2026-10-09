@@ -1,9 +1,10 @@
 import React from "react";
-import { PawPrint } from "lucide-react";
+import { Heart, PawPrint, Sparkles } from "lucide-react";
 import { myRequest } from "@/lib/data";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 import MyRequest from "@/app/components/MyRequest";
+import NoRequestAnimetion from "@/app/components/NoRequestAnimetion";
 
 const AdoptionRequestsModal = async () => {
   const session = await auth.api.getSession({
@@ -14,8 +15,6 @@ const AdoptionRequestsModal = async () => {
     headers: await headers(),
   });
   const adoptionRequests = await myRequest(userEmail, token);
-
-  
 
   return (
     // Glassmorphism Blurred Overlay Background
@@ -37,9 +36,17 @@ const AdoptionRequestsModal = async () => {
 
         {/* Dynamic Data Rows / Cards */}
         <div className="flex flex-col gap-4 md:gap-2.5">
-          {adoptionRequests.map((request, index) => {
-            return <MyRequest key={index} request={request} userEmail={userEmail} />;
-          })}
+          {adoptionRequests.length <= 0 ? (
+            <>
+            <NoRequestAnimetion/>
+            </>
+          ) : (
+            <div>
+              {adoptionRequests.map((request, index) => {
+                return <MyRequest key={index} request={request} userEmail={userEmail} />;
+              })}
+            </div>
+          )}
         </div>
       </div>
     </div>

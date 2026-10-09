@@ -1,5 +1,6 @@
 export const dynamic = "force-dynamic";
 import Banner from "../components/Banner";
+import CareGuide from "../components/CareGuide";
 import Feature from "../components/Feature";
 import NumberDetails from "../components/NumberDetails";
 
@@ -9,6 +10,7 @@ export default function Home() {
       <Banner></Banner>
       <NumberDetails />
       <Feature />
+      <CareGuide/>
     </div>
   );
 }

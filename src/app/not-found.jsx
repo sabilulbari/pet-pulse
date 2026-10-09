@@ -20,7 +20,7 @@ export default function PetLoadingScreen() {
   return (
     <div className="min-h-screen w-full relative overflow-hidden flex flex-col items-center justify-center bg-gradient-to-br from-[#DCD4FA] via-[#FADCE5] to-[#FCE6CE] px-6 select-none">
       {/* 1. Ambient Backdrop Decor (Sparkles, Clouds) */}
-      <div className="absolute top-[22%] left-[18%] text-white/50 text-xl animate-pulse">✦</div>
+      <div className="absolute top-[22%] left-[18%] text-white/50 text-xl animate-pulse ">✦</div>
       <div className="absolute top-[40%] right-[14%] text-white/60 text-2xl animate-pulse [animation-delay:0.3s]">✦</div>
       <div className="absolute bottom-[30%] left-[22%] text-white/40 text-lg animate-pulse [animation-delay:0.6s]">✦</div>
 
@@ -28,7 +28,7 @@ export default function PetLoadingScreen() {
       <div className="absolute bottom-[22%] right-[-3%] w-44 h-20 bg-white/20 rounded-full blur-lg opacity-50 pointer-events-none" />
 
       {/* Main Core Layout Wrapper */}
-      <div className="flex flex-col items-center max-w-md w-full text-center z-10">
+      <div className="flex flex-col items-center max-w-md w-full text-center z-10 mt-20">
         {/* 2. Cinematic Cute Pet & Heart Section */}
         <div className="relative mb-6">
           {/* Floating Love Bubble */}

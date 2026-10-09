@@ -1,4 +1,5 @@
 import ListingCard from "@/app/components/dashMyListing/ListingCard";
+import NoPetFoundPage from "@/app/components/NoPetFoundPage";
 import { auth } from "@/lib/auth";
 import { myListingData } from "@/lib/data";
 import { PawPrint } from "lucide-react";
@@ -53,17 +54,9 @@ const MyListing = async () => {
 
       {/* Listing Content (No Pet / Grid List) */}
       {totalListings === 0 ? (
-        <div className="flex justify-center items-center min-h-[40vh] mt-10">
-          <div className="flex gap-4 items-center bg-white p-6 rounded-2xl border border-slate-100 shadow-xs">
-            <div className="w-12 h-12 rounded-2xl bg-slate-50 flex items-center justify-center border border-slate-100 shrink-0">
-              <PawPrint className="w-5 h-5 text-indigo-600 fill-indigo-100" />
-            </div>
-            <div>
-              <h2 className="text-lg font-bold text-slate-800 tracking-tight">No Pet Found</h2>
-              <p className="text-xs sm:text-sm text-slate-500 font-medium mt-0.5">You haven&apos;t added any pets yet. Please add a pet!</p>
-            </div>
-          </div>
-        </div>
+        <NoPetFoundPage>
+          
+        </NoPetFoundPage>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 xl:grid-cols-3 gap-4 mt-6">
           {myListing.map((list) => (
